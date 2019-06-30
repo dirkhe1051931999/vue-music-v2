@@ -70,7 +70,7 @@
 
 ### :rainbow: 执行
 
-> 记着先 `npm install`
+> 记着先 `npm install`服务端和客户端
 
 ```js
 {
