@@ -12,18 +12,18 @@
 ## :rainbow: 技术栈
 
 1. `vue-cli3`、`vue`、`vuex`、`vue-router` - vue 全家桶
-2. [better-scroll](https://ustbhuangyi.github.io/better-scroll/doc/zh-hans/) - 解决移动端滚动场景，实际工作中也用了 better-scroll，完美兼容安卓 4.3 及 ios8，可以放心使用
+2. [better-scroll](https://ustbhuangyi.github.io/better-scroll/doc/zh-hans/) - 实现移动端页面滚动，实际工作中也用了 better-scroll，完美兼容安卓 4.3 及 ios8，可以放心使用
 3. less+[vw 移动端适配](https://github.com/dirkhe1051931999/common-demo/blob/master/webpack-study-notes/step8)
 4. [网易云音乐现成 node 接口](https://binaryify.github.io/NeteaseCloudMusicApi/#/?id=%E6%8E%A8%E8%8D%90%E6%AD%8C%E5%8D%95) - 后端接口，十分感谢[Binaryify](https://github.com/Binaryify)提供这么好的接口
-5. [fastclick](https://github.com/ftlabs/fastclick) - 解决 300ms 延迟问题，
-6. [lazyload](https://github.com/verlok/lazyload) - 解决图片懒加载,
+5. [fastclick](https://github.com/ftlabs/fastclick) - 解决 300ms 延迟问题
+6. [lazyload](https://github.com/verlok/lazyload) - 解决图片懒加载
 7. [sprint](https://github.com/bendc/sprint) - 获取全局的的 dom，比如迷你播放器，组件内采用 ref 配合原生获取
 8. [ydui](http://vue.ydui.org/) - 项目的 UI 框架
 9. [create-keyframe-animation](https://github.com/HenrikJoreteg/create-keyframe-animation/stargazers) - 处理 css3 动画
 10. [moment](https://github.com/moment/moment/stargazers) - 处理时间
 11. [vue-server-renderer](https://www.npmjs.com/package/vue-server-renderer) - 生成骨架屏
-12. [axios](https://github.com/axios/axios) - 封装了供项目使用的 axios
-13. ES6/7/8 解构、async/await、Promise 、proxy node 端代理
+12. [axios](https://github.com/axios/axios) - 请求接口
+13. ES6/7/8 语法：解构、async/await、Promise
 14. localStorage - 存储收藏的歌曲和历史播放歌曲
 
 ## :rainbow: 项目结构
@@ -36,28 +36,28 @@
 ├─server # 服务端，来源网易云音乐现成 node 接口，完全复制过来的
 └─src
     ├─api # 接口
-    │  └─restfulApi # 接口
+    │  └─restfulApi #
     ├─common
     │  ├─fonts # 图标
     │  ├─images # 图片
     │  ├─mixins # mixins
     │  ├─scripts # 页面依赖的js脚本
-    │  └─styles # 样式文件，样式初始化，变量定义
+    │  └─styles # 样式文件，css初始化，变量定义等
     ├─components
     │  ├─bubble # 下拉刷新的css3气泡动画，可以不用看
     │  ├─carousel # 轮播图
     │  ├─loading # loading组件
     │  ├─musiclist # 音乐列表
-    │  ├─navBar # 页面顶部的bar
+    │  ├─navBar # 首页顶部的bar
     │  ├─palace # 首页的宫格
     │  ├─progressbar # 播放器内核的进度条
-    │  ├─scroll # 封装better-scroll的组件，可以以slot形式使用
-    │  ├─skeleton # 骨架屏组价，可以自定义样式
+    │  ├─scroll # 封装后better-scroll组件，可以以slot形式使用，来实现页面滚动
+    │  ├─skeleton # 骨架屏组件，可以自定义样式
     │  │  ├─basic
     │  │  └─layout
     │  ├─songlist # 歌单列表组件，推荐歌单和官方推荐共用的样式组件
     │  └─titleBar # 首页的状态栏，用于切换个人中心与推荐页
-    ├─config # 提前定义的播放模式文件
+    ├─config # 一些配置参数
     ├─router # 路由文件
     ├─store # vuex
     └─views
@@ -77,8 +77,8 @@
   "scriptInfo": {
     "netserver": "开启后端服务",
     "serve": "开启前端服务",
-    "build": "生产环境执行构建"
-    "skeleton": "生成骨架屏",
+    "build": "生产环境执行构建",
+    "skeleton": "生成骨架屏"
   },
   "scripts": {
     "netserver": "node ./server/app.js",
@@ -149,13 +149,13 @@
 
 1. 播放列表
 2. 优化了页面路由结构
-3. 增加了数据的兜底处理
+3. 数据兜底处理
 
 - :alarm_clock: 2019-06-23 完成
 
 1. 全屏播放页面、拖拽进度条，以及全屏展开的时的动画
 2. vuex 的初始化工作
-3. 以类的方式格式化了当前播放歌曲
+3. 格式化歌单列表
 4. 页面的 loading 效果
 5. 获取歌词接口挂掉了，暂时没写歌单
 6. 计划删除路由的出入场动画，感觉比较鸡肋
@@ -164,19 +164,19 @@
 - :alarm_clock: 2019-06-29 完成
 
 1. 迷你/全屏播放器的联调
-2. 上下切换歌曲的实现逻辑
+2. 上下切换歌曲
 3. 播放状态、播放历史、播放列表、播放模式等需要全局访问的状态，集中在 vuex 中管理
 4. 播放器切换之间的动画
 
 - :alarm_clock: 2019-06-30 完成
 
-1. 规避了链接不合法导致播放异常的问题
+1. 修复了链接不合法导致播放异常的问题
 2. 修复了播放器切换之间的 bug
-3. 把播放器内核放在了 app.vue 中，可以在 app 下所有的路由都可以访问到播放器内核
+3. 把播放器内核组件放在了 App.vue 中，可以在 App.vue 下所有路由页都可以访问到播放器内核组件
 4. 个人中心、搜索页、播放历史、我的收藏、播放列表，侧边栏等页面
 5. 骨架屏的注入
 6. webpack 优化
-7. 因为迷你播放器是 fixed 布局，所以需要适配页面底部
+7. 迷你播放器时适配页面底部
 
 ## :rainbow: 碰见的问题
 
@@ -190,7 +190,7 @@
    > 当全屏播放器切换到迷你播放器时，迷你播放器时 fixed 的，所以 window 高度会被占用一部分，这部分需要在监听 vuex 中的 fullScreen state，当为 false 的时候，并且迷你播放器高度存在，就适配下高度。避免滑不到底部
 5. vuex 播放列表的管理
 
-   > 每次打开歌单响应或者音乐列表页，都要`selectPlay`，存储播放列表，核心代码
+   > 每次打开歌单详情或者音乐列表页，都要`selectPlay`，存储播放列表，核心代码
 
    ```js
    // src/store/action.js
@@ -221,9 +221,9 @@
    ```
 
 6. 骨架屏的应用
-   > 项目中的骨架屏是 ssr 注入的，可以自定义样式，与常见写成一个 base64 的实现有点区别。可以看我之前写的一个 mode[vue-cli3 中使用骨架屏](https://github.com/dirkhe1051931999/common-demo/tree/master/vue-skeleton)
+   > 项目中的骨架屏是 ssr 注入的，可以自定义样式，与常见写成一个 base64 的实现有点区别。可以看我之前写的一个 demo[vue-cli3 中使用骨架屏](https://github.com/dirkhe1051931999/common-demo/tree/master/vue-skeleton)
 7. \$listeners 事件回传
-   > \$listeners 包含了子组件所有的监听器，为了实现事件回传。自定义事件的本质：子组件收集了父组件传入的 listener，也就是自定义事件回调，在$emit 的时候执行这个回调，并且可以传入相应的参数。之前有写过[\$listener 与 vue 自定义事件的联系](https://github.com/dirkhe1051931999/hjBlog/blob/master/blog-vue/lessons/14.md)和[源码分析 vue 的 DOM 事件和自定义事件](https://github.com/dirkhe1051931999/hjBlog/blob/master/blog-vue-sourcecode-study/lessons/30.md)，这两篇文章有助于理解\$listeners
+   > \$listeners 包含了子组件所有的监听器，来实现事件回传。自定义事件的本质：子组件收集了父组件传入的 listener，也就是自定义事件回调，在$emit 的时候执行这个回调，并且可以传入相应的参数。之前有写过[\$listener 与 vue 自定义事件的联系](https://github.com/dirkhe1051931999/hjBlog/blob/master/blog-vue/lessons/14.md)和[源码分析 vue 的 DOM 事件和自定义事件](https://github.com/dirkhe1051931999/hjBlog/blob/master/blog-vue-sourcecode-study/lessons/30.md)，这两篇文章有助于理解\$listeners
 8. icon 采用 woff
    > 页面上的所有 icon 是用了 woff 文件`common/fonts/font.woff`
 9. webpack 优化
