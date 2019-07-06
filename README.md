@@ -36,7 +36,7 @@
 ├─server # 服务端，来源网易云音乐现成 node 接口，完全复制过来的
 └─src
     ├─api # 接口
-    │  └─restfulApi #
+    │  └─restfulApi 
     ├─common
     │  ├─fonts # 图标
     │  ├─images # 图片
@@ -107,7 +107,7 @@
 1. 增加私人 FM、每日推荐、歌单页
 2. 增加歌手列表
 3. 增加歌曲评论
-4. 播放器内核-歌词
+4. ~~播放器内核-歌词~~
 5. ...
 
 ## :rainbow: 实现效果
@@ -226,8 +226,10 @@
    > \$listeners 包含了子组件所有的监听器，来实现事件回传。自定义事件的本质：子组件收集了父组件传入的 listener，也就是自定义事件回调，在$emit 的时候执行这个回调，并且可以传入相应的参数。之前有写过[\$listener 与 vue 自定义事件的联系](https://github.com/dirkhe1051931999/hjBlog/blob/master/blog-vue/lessons/14.md)和[源码分析 vue 的 DOM 事件和自定义事件](https://github.com/dirkhe1051931999/hjBlog/blob/master/blog-vue-sourcecode-study/lessons/30.md)，这两篇文章有助于理解\$listeners
 8. icon 采用 woff
    > 页面上的所有 icon 是用了 woff 文件`common/fonts/font.woff`
-9. webpack 优化
-   > webpack 优化一直是项目中的重点，优化有很多方向：减少代码体积、chunk 和加快构建速度。减少代码体积可以是 tree shaking、scope hosting 和开启 gz，前两者是 webpack4 在生产环境自带的优化功能；加快构建速度可以使用动态链路库 dll。之前有脱离 vue-cli 从基础到深入的使用了 webpack，每一个点都有对应的 demo，并且分析并解决了开启 tree shaking 后会存在的问题。地址：[webpack 深入到进阶](https://github.com/dirkhe1051931999/common-demo/blob/master/webpack-study-notes/readme.md#1)
+9. 单曲歌词如何解析
+   > 接口返回的歌词不是理想的歌词格式，需要进行二次解析与整合，我写了一个解析歌词的 demo:[网易云歌词解析](https://github.com/dirkhe1051931999/hjBlog/blob/master/blog-JavaScript/lessons/26.md)
+10. webpack 优化
+    > webpack 优化一直是项目中的重点，优化有很多方向：减少代码体积、chunk 和加快构建速度。减少代码体积可以是 tree shaking、scope hosting 和开启 gz，前两者是 webpack4 在生产环境自带的优化功能；加快构建速度可以使用动态链路库 dll。之前有脱离 vue-cli 从基础到深入的使用了 webpack，每一个点都有对应的 demo，并且分析并解决了开启 tree shaking 后会存在的问题。地址：[webpack 深入到进阶](https://github.com/dirkhe1051931999/common-demo/blob/master/webpack-study-notes/readme.md#1)
 
 ## :rainbow: 参考
 

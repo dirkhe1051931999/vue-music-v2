@@ -24,7 +24,7 @@
       <!-- 中间区域 -->
       <div class="middle">
         <!--唱片区域-->
-        <div class="middle-l" ref="middleL">
+        <div class="picture" ref="picture">
           <div class="cd-wrapper" ref="cdWrapper">
             <div class="cd" :class="cdStateClass">
               <Loading1
@@ -37,7 +37,7 @@
           </div>
         </div>
         <!-- 歌词区域 -->
-        <div class="middle-r"></div>
+        <div class="lyric" ref="lyric"></div>
       </div>
       <!-- 底部歌曲操作区域 -->
       <div class="bottom" ref="bottom">
@@ -140,6 +140,7 @@ import { playerMixin } from "common/mixins/player";
 import { mapGetters, mapMutations, mapActions } from "vuex";
 // 一些公共的方法
 import { shuffle, formatTime, getRandomInt } from "common/scripts/util";
+import { Lyric } from "common/scripts/lyric";
 // 初始化添加css前缀方法
 const transform = prefixStyle("transform");
 const transitionDuration = prefixStyle("transitionDuration");
@@ -154,7 +155,7 @@ export default {
   data() {
     return {
       songUrl: "",
-      songLyric: {},
+      songLyric: null,
       songReady: false,
       errorUrlFlag: false,
       nowTime: 0,
@@ -207,10 +208,10 @@ export default {
       this.errorUrlFlag = false;
       this.$refs.audio.src = newUrl;
       this.$refs.audio.play();
-    },
-    songLyric(newLyric) {
-      console.log("歌词", newLyric);
     }
+    // songLyric(newLyric) {
+    //   console.log("歌词", newLyric);
+    // }
   },
   computed: {
     ...mapGetters([
@@ -307,8 +308,8 @@ export default {
         return;
       }
       if (result.code == 200) {
-        let { klyric, lrc } = result;
-        this.songLyric = { klyric, lrc };
+        this.songLyric = null;
+        this.songLyric = new Lyric(result);
       }
     },
     // audio媒体：切换歌曲太块触发dom未加载完毕的错误
@@ -323,6 +324,7 @@ export default {
     // audio媒体：更新进度条
     updateTime(e) {
       this.nowTime = e.target.currentTime;
+      this.$refs.lyric.innerHTML = this.songLyric.getCurPlayLyric(this.nowTime);
       this.allTime = e.target.duration;
     },
     // audio媒体：歌曲播放完毕去播放下一首歌（要判断模式）
@@ -515,10 +517,10 @@ export default {
           easing: "linner"
         }
       });
-      animations.runAnimation(this.$refs.middleL, "move");
+      animations.runAnimation(this.$refs.picture, "move");
       animations.runAnimation(this.$refs.bottom, "move", () => {
         animations.unregisterAnimation("move");
-        this.$refs.middleL && (this.$refs.middleL.style.animation = "");
+        this.$refs.picture && (this.$refs.picture.style.animation = "");
         this.$refs.bottom.style.animation = "";
       });
     },
@@ -556,8 +558,8 @@ export default {
         }
       });
       this.$refs.bottom.style[transform] = `translate3d(0,150%,0)`;
-      animations.runAnimation(this.$refs.middleL, "leave", () => {
-        this.$refs.middleL && (this.$refs.middleL.style.animation = "");
+      animations.runAnimation(this.$refs.picture, "leave", () => {
+        this.$refs.picture && (this.$refs.picture.style.animation = "");
         this.$refs.bottom && (this.$refs.bottom.style[transform] = "");
         this.setFullScreen(false);
       });
@@ -610,7 +612,7 @@ export default {
     }
     .middle {
       padding-top: 50px;
-      .middle-l {
+      .picture {
         display: inline-block;
         vertical-align: top;
         position: relative;
@@ -657,6 +659,19 @@ export default {
             }
           }
         }
+      }
+      .lyric {
+        text-align: center;
+        box-sizing: border-box;
+        padding: 0 32px;
+        width: 100%;
+        color: #ffffff;
+        font-size: @font-size-7;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 100;
       }
     }
     .bottom {
