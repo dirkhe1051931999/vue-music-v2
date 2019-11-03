@@ -116,23 +116,23 @@
 
 ### :paw_prints: 首页
 
-![1](./screenshot/2.jpg);
+![1](https://tva1.sinaimg.cn/large/007X8olVly1g8krv2tc7fj316p0n4dhm.jpg);
 
 ### :paw_prints: 播放器内核、歌单详情
 
-![2](./screenshot/1.jpg);
+![2](https://tva1.sinaimg.cn/large/007X8olVly1g8krv2mus0j30ae0mngma.jpg);
 
 ### :paw_prints: 搜索页
 
-![3](./screenshot/3.jpg);
+![3](https://tva1.sinaimg.cn/large/007X8olVly1g8krv36xdzj316n0n80wp.jpg);
 
 ### :paw_prints: 个人中心
 
-![4](./screenshot/4.jpg);
+![4](https://tva1.sinaimg.cn/large/007X8olVly1g8krv3bhd8j30ll0ncmxv.jpg);
 
 ### :paw_prints: 推荐列表
 
-![5](./screenshot/5.png);
+![5](https://tva1.sinaimg.cn/large/007X8olVly1g8krv3rh6cj30lq0ncwf7.jpg);
 
 ## :rainbow: 进度
 
