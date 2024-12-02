@@ -2,8 +2,6 @@ const path = require('path');
 const resolve = (dir) => path.join(__dirname, dir);
 // 开启gzip
 const CompressionPlugin = require('compression-webpack-plugin');
-// Webpack包文件分析器
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 module.exports = {
   publicPath: process.env.NODE_ENV === 'production' ? '/163-music' : '/',
   outputDir: 'dist',
@@ -41,7 +39,6 @@ module.exports = {
         threshold: 8192,
         minRatio: 0.8,
       }),
-      new BundleAnalyzerPlugin(),
     ];
     //开发环境
     let pluginsDev = [];
