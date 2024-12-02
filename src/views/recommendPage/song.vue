@@ -1,29 +1,26 @@
 <template>
   <div class="songlist">
     <NavBar />
-    <scroll class="songlist-content" ref="scroll">
-      歌单
-    </scroll>
+    <scroll class="songlist-content" ref="scroll"> 歌单 </scroll>
   </div>
 </template>
 
 <script>
-import { scroll } from "common/mixins/scroll";
+import { scroll } from 'common/mixins/scroll';
 export default {
   mixins: [scroll],
   components: {
-    NavBar: () => import("components/navBar/navBar"),
-    Scroll: () => import("components/scroll/scroll")
+    NavBar: () => import('components/navBar/navBar'),
+    Scroll: () => import('components/scroll/scroll'),
   },
-  name: "",
+  name: '',
   data() {
     return {};
   },
   methods: {},
   created() {},
-  mounted() {}
+  mounted() {},
 };
 </script>
 
-<style scoped lang='less'>
-</style>
+<style scoped lang="scss"></style>

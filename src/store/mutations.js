@@ -1,4 +1,5 @@
-import * as types from "./mutation-type";
+import * as types from './mutation-type';
+
 const mutations = {
   // 设置歌手列表
   [types.SET_SINGER](state, singer) {
@@ -47,6 +48,6 @@ const mutations = {
   // 设置当前我的收藏
   [types.SET_FAVORITE_LIST](state, favoriteList) {
     state.favoriteList = favoriteList;
-  }
+  },
 };
 export default mutations;

@@ -1,35 +1,37 @@
-// 获取min到max之间的整数
-export function getRandomInt(min, max) {
-  return Math.floor(Math.random() * (max - min + 1) + min);
-}
-export function shuffle(arr) {
-  var arrc = arr.slice();
-  for (let i = 0; i < arrc.length; i++) {
-    let j = getRandomInt(0, i);
-    let t = arrc[i];
-    arrc[i] = arrc[j];
-    arrc[j] = t;
-  }
-  return arrc;
-}
-// 搜索节流处理
-export function debounce(func, delay) {
-  let timer;
-  return function(...args) {
-    if (timer) {
-      clearTimeout(timer);
+const utils = {
+  // 获取指定范围内的随机整数
+  getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+  },
+
+  // 数组随机洗牌
+  shuffle(arr) {
+    const copy = [...arr];
+    for (let i = 0; i < copy.length; i++) {
+      const j = this.getRandomInt(0, i);
+      [copy[i], copy[j]] = [copy[j], copy[i]];
     }
-    timer = setTimeout(() => {
-      func.apply(this, args);
-    }, delay);
-  };
-}
-// 格式化时间
-export function formatTime(interval) {
-  interval = interval | 0;
-  let minute = (interval / 60) | 0;
-  let seconds = interval % 60;
-  minute = minute <= 9 && minute >= 0 ? "0" + minute : minute;
-  seconds = seconds <= 9 && seconds >= 0 ? "0" + seconds : seconds;
-  return `${minute}:${seconds}`;
-}
+    return copy;
+  },
+
+  // 防抖函数
+  debounce(func, delay) {
+    let timer;
+    return function (...args) {
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        func.apply(this, args);
+      }, delay);
+    };
+  },
+
+  // 时间格式化
+  formatTime(interval) {
+    interval = Math.floor(interval);
+    const minute = Math.floor(interval / 60);
+    const seconds = interval % 60;
+    return `${minute.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+  },
+};
+
+export const { getRandomInt, shuffle, debounce, formatTime } = utils;

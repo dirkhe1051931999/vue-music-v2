@@ -1,29 +1,15 @@
 <template>
   <div ref="container">
     <!--导航栏-->
-    <TitleBar
-      ref="titleBar"
-      @openSearch="openSearch"
-      :active="0"
-      @openSlide="showSlide = true"
-    />
+    <TitleBar ref="titleBar" @openSearch="openSearch" :active="0" @openSlide="showSlide = true" />
     <!-- 悬浮的输入框 -->
-    <TitleBar2
-      ref="titleBar2"
-      :class="{ animate: !showTitleBar }"
-      @openSearch="openSearch"
-      class="titlebar2"
-    />
+    <TitleBar2 ref="titleBar2" :class="{ animate: !showTitleBar }" @openSearch="openSearch" class="titlebar2" />
     <!-- Carousel -->
     <Carousel :carousel="carousel" />
     <!-- 宫格 -->
     <Palace />
     <!-- 推荐歌单 -->
-    <Songlist
-      :list="recommendSong"
-      title="推荐歌单"
-      v-if="recommendSong.length > 0"
-    />
+    <Songlist :list="recommendSong" title="推荐歌单" v-if="recommendSong.length > 0" />
     <!-- 已经到底了 -->
     <div class="list-over" v-if="recommendSong.length > 0">已经到底了</div>
     <Loading1 class="loading" v-if="!recommendSong.length" />
@@ -41,17 +27,11 @@
       <ul class="info">
         <li class="github">
           <img src="~common/images/githublogo.png" alt="" class="" />
-          <a href="https://github.com/dirkhe1051931999" target="_blank"
-            >dirkhe1051931999</a
-          >
+          <a href="https://github.com/dirkhe1051931999" target="_blank">dirkhe1051931999</a>
         </li>
         <li class="item">
           <img src="~common/images/githublogo.png" alt="" class="" />
-          <a
-            href="https://github.com/dirkhe1051931999/vue-music-v2"
-            target="_blank"
-            >项目地址</a
-          >
+          <a href="https://github.com/dirkhe1051931999/vue-music-v2" target="_blank">项目地址</a>
         </li>
       </ul>
     </yd-popup>
@@ -59,89 +39,85 @@
 </template>
 
 <script>
-import { transition } from "common/mixins/transition";
-import api from "api/api";
-import { catchError } from "api/catchError";
-import { mapGetters } from "vuex";
-import Vue from "vue";
-import { Popup } from "vue-ydui/dist/lib.px/popup";
-import { BackTop } from "vue-ydui/dist/lib.px/backtop";
-import "vue-ydui/dist/ydui.base.css";
+import { transition } from 'common/mixins/transition';
+import api from 'api/api';
+import { catchError } from 'api/catchError';
+import { mapGetters } from 'vuex';
+import Vue from 'vue';
+import { Popup } from 'vue-ydui/dist/lib.px/popup';
+import { BackTop } from 'vue-ydui/dist/lib.px/backtop';
+import 'vue-ydui/dist/ydui.base.css';
 Vue.component(BackTop.name, BackTop);
 Vue.component(Popup.name, Popup);
 const heightMiniPlayer = 60;
 export default {
   mixins: [transition],
   components: {
-    TitleBar: () => import("components/titleBar/titleBar"),
-    TitleBar2: () => import("components/titleBar/titleBar2"),
-    Carousel: () => import("components/carousel/carousel"),
-    Palace: () => import("components/palace/palace"),
-    Songlist: () => import("components/songlist/songlist")
+    TitleBar: () => import('components/titleBar/titleBar'),
+    TitleBar2: () => import('components/titleBar/titleBar2'),
+    Carousel: () => import('components/carousel/carousel'),
+    Palace: () => import('components/palace/palace'),
+    Songlist: () => import('components/songlist/songlist'),
   },
-  name: "",
+  name: '',
   computed: {
-    ...mapGetters(["fullScreen"]),
+    ...mapGetters(['fullScreen']),
     routerviewStyle() {
-      if (!this.fullScreen && $(".mini-player").height()) {
+      if (!this.fullScreen && $('.mini-player').height()) {
         return `bottom:${heightMiniPlayer + 35}px`;
       }
-    }
+    },
   },
   watch: {
     fullScreen(newFull) {
-      if (!newFull && $(".mini-player").height()) {
+      if (!newFull && $('.mini-player').height()) {
         this.$refs.container.style.paddingBottom = `${heightMiniPlayer}px`;
       }
-    }
+    },
   },
   data() {
     return {
       carousel: [],
       recommendSong: [],
       showTitleBar: true,
-      showSlide: false
+      showSlide: false,
     };
   },
   methods: {
     async getCarousel() {
       const [error, result] = await catchError(api.getBanner());
       if (error) {
-        this.$dialog.toast({ mes: "网络异常", timeout: 1000 });
+        this.$dialog.toast({ mes: '网络异常', timeout: 1000 });
         return;
       }
-      if (result.code == 200) {
+      if (result.code === 200) {
         this.carousel = result.banners;
       }
     },
     async getRecommendSong() {
       const [error, result] = await catchError(api.getRecommendSongList());
       if (error) {
-        this.$dialog.toast({ mes: "网络异常", timeout: 1000 });
+        this.$dialog.toast({ mes: '网络异常', timeout: 1000 });
         return;
       }
-      if (result.code == 200) {
+      if (result.code === 200) {
         this.recommendSong = result.result;
       }
     },
     listenScroll() {
-      window.addEventListener("scroll", e => {
+      window.addEventListener('scroll', (e) => {
         const scrollY = window.scrollY;
         if (this.$refs.titleBar) {
           const max = (this.$refs.titleBar.$el.clientHeight * 1) / 3;
-          if (scrollY > max) {
-            this.showTitleBar = false;
-          } else {
-            this.showTitleBar = true;
-          }
+          this.showTitleBar = scrollY <= max;
         }
       });
     },
     openSearch() {
       this.$router.push({
-        path: "/search"
+        path: '/search',
       });
-    }
+    },
   },
   created() {
     this.getCarousel();
@@ -149,15 +125,14 @@ export default {
   },
   mounted() {
     this.listenScroll();
-    if (!this.fullScreen && $(".mini-player").height()) {
+    if (!this.fullScreen && $('.mini-player').height()) {
       this.$refs.container.style.paddingBottom = `${heightMiniPlayer}px`;
     }
-  }
+  },
 };
 </script>
 
-<style scoped lang='less'>
-@import url(~common/styles/variable.less);
+<style scoped lang="scss">
 .titlebar2 {
   color: #ffffff;
   position: fixed;
@@ -165,7 +140,7 @@ export default {
   width: 100%;
   top: 0;
   z-index: 50;
-  background: @red;
+  background: $red;
   transition: all 0.5s ease;
   transform: translateY(-72px);
   &.animate {

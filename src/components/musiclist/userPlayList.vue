@@ -7,14 +7,14 @@
 <script>
 export default {
   components: {
-    Musiclist: () => import("./musiclist")
+    Musiclist: () => import('./musiclist'),
   },
   props: {
     list: {
       type: Array,
-      default: []
+      default: [],
     },
-    currentIndex: Number
+    currentIndex: Number,
   },
   data() {
     return {};
@@ -23,8 +23,7 @@ export default {
   computed: {},
   mounted() {},
 
-  methods: {}
+  methods: {},
 };
 </script>
-<style lang='less' scoped>
-</style>
+<style lang="scss" scoped></style>

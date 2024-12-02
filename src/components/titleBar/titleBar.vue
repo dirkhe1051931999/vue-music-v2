@@ -3,20 +3,8 @@
     <div class="bar">
       <div class="settings icon-setting" @click="$emit('openSlide')"></div>
       <div class="nav">
-        <div
-          class="recommed"
-          @click="$router.push('/index')"
-          :class="{ active: active == 0 }"
-        >
-          推荐页
-        </div>
-        <div
-          class="mine"
-          @click="$router.push('/user')"
-          :class="{ active: active == 1 }"
-        >
-          个人中心
-        </div>
+        <div class="recommed" @click="$router.push('/index')" :class="{ active: active === 0 }">推荐页</div>
+        <div class="mine" @click="$router.push('/user')" :class="{ active: active === 1 }">个人中心</div>
       </div>
       <div class="search icon-search" @click="openSearch"></div>
     </div>
@@ -26,30 +14,29 @@
 <script>
 export default {
   props: {
-    active: Number
+    active: Number,
   },
   components: {},
-  name: "",
+  name: '',
   data() {
     return {};
   },
   methods: {
     openSearch() {
-      this.$emit("openSearch");
-    }
+      this.$emit('openSearch');
+    },
   },
   created() {},
-  mounted() {}
+  mounted() {},
 };
 </script>
 
-<style scoped lang='less'>
-@import url(~common/styles/variable.less);
+<style scoped lang="scss">
 .title-bar {
   width: 100%;
   padding: 0 32px;
   box-sizing: border-box;
-  background: @red;
+  background: $red;
   color: #ffffff;
   height: 300px;
   .bar {
@@ -65,7 +52,7 @@ export default {
       width: 40%;
       display: flex;
       justify-content: space-between;
-      font-size: @font-size-large;
+      font-size: $font-size-large;
       color: #f18686;
       .active {
         color: #ffffff;

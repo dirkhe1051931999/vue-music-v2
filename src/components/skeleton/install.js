@@ -3,7 +3,7 @@ import skeletonCircle from './basic/skeleton-circle.vue';
 import skeletonSquare from './basic/skeleton-square.vue';
 import skeletonRow from './layout/skeleton-row.vue';
 import skeletonColumn from './layout/skeleton-column.vue';
-import './skeleton.less';
+import './skeleton.scss';
 
 function install(Vue) {
   Vue.component(skeleton.name, skeleton);

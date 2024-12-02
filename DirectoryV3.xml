@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+ <trees>
+     <tree path="/public/index.html" title="骨架屏生成会覆盖它"/>
+ </trees>

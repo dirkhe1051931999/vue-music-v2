@@ -14,41 +14,40 @@
 <script>
 export default {
   components: {},
-  name: "",
+  name: '',
   data() {
     return {
       place: [
         {
-          icon: "fm",
-          name: "私人FM",
-          href: "/index/privatefm"
+          icon: 'fm',
+          name: '私人FM',
+          href: '/index/privatefm',
         },
         {
-          icon: "recommend",
-          name: "每日推荐",
-          href: "/index/dailyrecommend"
+          icon: 'recommend',
+          name: '每日推荐',
+          href: '/index/dailyrecommend',
         },
         {
-          icon: "list",
-          name: "歌单",
-          href: "/index/song"
+          icon: 'list',
+          name: '歌单',
+          href: '/index/song',
         },
         {
-          icon: "rank",
-          name: "排行榜",
-          href: "/index/rank"
-        }
-      ]
+          icon: 'rank',
+          name: '排行榜',
+          href: '/index/rank',
+        },
+      ],
     };
   },
   methods: {},
   created() {},
-  mounted() {}
+  mounted() {},
 };
 </script>
 
-<style scoped lang='less'>
-@import url(~common/styles/variable.less);
+<style scoped lang="scss">
 .palace {
   margin-top: 60px;
   ul {
@@ -62,7 +61,7 @@ export default {
         position: relative;
         height: 100px;
         width: 100px;
-        background: @red;
+        background: $red;
         border-radius: 50%;
         display: flex;
         line-height: 100px;
@@ -73,7 +72,7 @@ export default {
       .name {
         text-align: center;
         padding-top: 15px;
-        font-size: @font-size-large;
+        font-size: $font-size-large;
       }
     }
   }

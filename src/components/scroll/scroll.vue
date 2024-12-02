@@ -2,7 +2,7 @@
   <div ref="wrapper" class="list-wrapper">
     <div class="scroll-content">
       <div ref="listWrapper">
-        <slot class="content"> </slot>
+        <slot class="content"></slot>
       </div>
       <slot name="pullup" :pullUpLoad="pullUpLoad" :isPullUpLoad="isPullUpLoad">
         <div class="pullup-wrapper" v-if="pullUpLoad">
@@ -15,20 +15,8 @@
         </div>
       </slot>
     </div>
-    <slot
-      name="pulldown"
-      :pullDownRefresh="pullDownRefresh"
-      :pullDownStyle="pullDownStyle"
-      :beforePullDown="beforePullDown"
-      :isPullingDown="isPullingDown"
-      :bubbleY="bubbleY"
-    >
-      <div
-        ref="pulldown"
-        class="pulldown-wrapper"
-        :style="pullDownStyle"
-        v-if="pullDownRefresh"
-      >
+    <slot name="pulldown" :pullDownRefresh="pullDownRefresh" :pullDownStyle="pullDownStyle" :beforePullDown="beforePullDown" :isPullingDown="isPullingDown" :bubbleY="bubbleY">
+      <div ref="pulldown" class="pulldown-wrapper" :style="pullDownStyle" v-if="pullDownRefresh">
         <div class="before-trigger" v-if="beforePullDown">
           <bubble :y="bubbleY"></bubble>
         </div>
@@ -46,14 +34,14 @@
 </template>
 
 <script type="text/ecmascript-6">
-import BScroll from "better-scroll";
-import Loading from "../loading/loading.vue";
-import Bubble from "../bubble/bubble.vue";
-import { getRect, ease } from "./common";
+import BScroll from 'better-scroll';
+import Bubble from '../bubble/bubble.vue';
+import Loading from '../loading/loading.vue';
+import { getRect } from './common';
 
-const COMPONENT_NAME = "scroll";
-const DIRECTION_H = "horizontal";
-const DIRECTION_V = "vertical";
+const COMPONENT_NAME = 'scroll';
+const DIRECTION_H = 'horizontal';
+const DIRECTION_V = 'vertical';
 
 export default {
   name: COMPONENT_NAME,
@@ -62,66 +50,66 @@ export default {
       type: Array,
       default: function() {
         return [];
-      }
+      },
     },
     probeType: {
       type: Number,
-      default: 1
+      default: 1,
     },
     click: {
       type: Boolean,
-      default: true
+      default: true,
     },
     listenScroll: {
       type: Boolean,
-      default: false
+      default: false,
     },
     listenBeforeScroll: {
       type: Boolean,
-      default: false
+      default: false,
     },
     listenScrollEnd: {
       type: Boolean,
-      default: false
+      default: false,
     },
     direction: {
       type: String,
-      default: DIRECTION_V
+      default: DIRECTION_V,
     },
     scrollbar: {
       type: null,
-      default: false
+      default: false,
     },
     pullDownRefresh: {
       type: null,
-      default: false
+      default: false,
     },
     pullUpLoad: {
       type: null,
-      default: false
+      default: false,
     },
     startY: {
       type: Number,
-      default: 0
+      default: 0,
     },
     refreshDelay: {
       type: Number,
-      default: 20
+      default: 20,
     },
     freeScroll: {
       type: Boolean,
-      default: false
+      default: false,
     },
     mouseWheel: {
       type: Boolean,
-      default: false
+      default: false,
     },
     bounce: {
-      default: true
+      default: true,
     },
     zoom: {
-      default: false
-    }
+      default: false,
+    },
   },
   data() {
     return {
@@ -130,8 +118,8 @@ export default {
       isPullingDown: false,
       isPullUpLoad: false,
       pullUpDirty: true,
-      pullDownStyle: "",
-      bubbleY: 0
+      pullDownStyle: '',
+      bubbleY: 0,
     };
   },
   computed: {
@@ -145,8 +133,8 @@ export default {
       return this.pullUpDirty ? moreTxt : noMoreTxt;
     },
     refreshTxt() {
-      return (this.pullDownRefresh && this.pullDownRefresh.txt) || "刷新成功";
-    }
+      return (this.pullDownRefresh && this.pullDownRefresh.txt) || '刷新成功';
+    },
   },
   created() {
     this.pullDownInitTop = -50;
@@ -165,8 +153,7 @@ export default {
         return;
       }
       if (this.$refs.listWrapper && (this.pullDownRefresh || this.pullUpLoad)) {
-        this.$refs.listWrapper.style.minHeight = `${getRect(this.$refs.wrapper)
-          .height + 1}px`;
+        this.$refs.listWrapper.style.minHeight = `${getRect(this.$refs.wrapper).height + 1}px`;
       }
 
       let options = {
@@ -181,30 +168,30 @@ export default {
         freeScroll: this.freeScroll,
         mouseWheel: this.mouseWheel,
         bounce: this.bounce,
-        zoom: this.zoom
+        zoom: this.zoom,
       };
 
       this.scroll = new BScroll(this.$refs.wrapper, options);
 
       if (this.listenScroll) {
-        this.scroll.on("scroll", pos => {
-          this.$emit("scroll", pos);
+        this.scroll.on('scroll', pos => {
+          this.$emit('scroll', pos);
         });
       }
 
       if (this.listenScrollEnd) {
-        this.scroll.on("scrollEnd", pos => {
-          this.$emit("scroll-end", pos);
+        this.scroll.on('scrollEnd', pos => {
+          this.$emit('scroll-end', pos);
         });
       }
 
       if (this.listenBeforeScroll) {
-        this.scroll.on("beforeScrollStart", () => {
-          this.$emit("beforeScrollStart");
+        this.scroll.on('beforeScrollStart', () => {
+          this.$emit('beforeScrollStart');
         });
 
-        this.scroll.on("scrollStart", () => {
-          this.$emit("scroll-start");
+        this.scroll.on('scrollStart', () => {
+          this.$emit('scroll-start');
         });
       }
 
@@ -233,7 +220,7 @@ export default {
     },
     clickItem(e, item) {
       console.log(e);
-      this.$emit("click", item);
+      this.$emit('click', item);
     },
     destroy() {
       this.scroll.destroy();
@@ -255,13 +242,13 @@ export default {
       }
     },
     _initPullDownRefresh() {
-      this.scroll.on("pullingDown", () => {
+      this.scroll.on('pullingDown', () => {
         this.beforePullDown = false;
         this.isPullingDown = true;
-        this.$emit("pullingDown");
+        this.$emit('pullingDown');
       });
 
-      this.scroll.on("scroll", pos => {
+      this.scroll.on('scroll', pos => {
         if (!this.pullDownRefresh) {
           return;
         }
@@ -269,7 +256,7 @@ export default {
           this.bubbleY = Math.max(0, pos.y + this.pullDownInitTop);
           this.pullDownStyle = `top:${Math.min(
             pos.y + this.pullDownInitTop,
-            10
+            10,
           )}px`;
         } else {
           this.bubbleY = 0;
@@ -277,14 +264,14 @@ export default {
 
         if (this.isRebounding) {
           this.pullDownStyle = `top:${10 -
-            (this.pullDownRefresh.stop - pos.y)}px`;
+          (this.pullDownRefresh.stop - pos.y)}px`;
         }
       });
     },
     _initPullUpLoad() {
-      this.scroll.on("pullingUp", () => {
+      this.scroll.on('pullingUp', () => {
         this.isPullUpLoad = true;
-        this.$emit("pullingUp");
+        this.$emit('pullingUp');
       });
     },
     _reboundPullDown() {
@@ -304,28 +291,29 @@ export default {
         this.isRebounding = false;
         this.refresh();
       }, this.scroll.options.bounceTime);
-    }
+    },
   },
   watch: {
     data() {
       setTimeout(() => {
         this.forceUpdate(true);
       }, this.refreshDelay);
-    }
+    },
   },
   components: {
     Loading,
-    Bubble
-  }
+    Bubble,
+  },
 };
 </script>
 
-<style lang="less" scoped>
+<style lang="scss" scoped>
 .list-wrapper {
   position: relative;
   height: 100%;
   overflow: hidden;
   background: #fff;
+
   .pulldown-wrapper {
     position: absolute;
     width: 100%;
@@ -335,9 +323,11 @@ export default {
     align-items: center;
     transition: all;
   }
+
   .after-trigger {
     margin-top: 0.133333rem;
   }
+
   .pullup-wrapper {
     position: relative;
     top: 0;
@@ -346,6 +336,7 @@ export default {
     justify-content: center;
     align-items: center;
     padding: 0.213333rem 0;
+
     .after-trigger {
       position: relative;
       top: -15px;

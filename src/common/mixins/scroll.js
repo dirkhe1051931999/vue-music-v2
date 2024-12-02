@@ -1,32 +1,32 @@
 export const scroll = {
   computed: {
     // 下上拉加载下拉刷新计算属性
-    scrollbarObj: function() {
+    scrollbarObj: function () {
       return this.scrollbar
         ? {
-            fade: this.scrollbarFade
+            fade: this.scrollbarFade,
           }
         : false;
     },
-    pullDownRefreshObj: function() {
+    pullDownRefreshObj: function () {
       return this.pullDownRefresh
         ? {
             threshold: parseInt(this.pullDownRefreshThreshold),
-            stop: parseInt(this.pullDownRefreshStop)
+            stop: parseInt(this.pullDownRefreshStop),
           }
         : false;
     },
-    pullUpLoadObj: function() {
+    pullUpLoadObj: function () {
       return this.pullUpLoad
         ? {
             threshold: parseInt(this.pullUpLoadThreshold),
             txt: {
               more: this.pullUpLoadMoreTxt,
-              noMore: this.pullUpLoadNoMoreTxt
-            }
+              noMore: this.pullUpLoadNoMoreTxt,
+            },
           }
         : false;
-    }
+    },
   },
   watch: {
     // 上拉加载下拉刷新监听
@@ -34,7 +34,7 @@ export const scroll = {
       handler() {
         this.rebuildScroll();
       },
-      deep: true
+      deep: true,
     },
     pullDownRefreshObj: {
       handler(val) {
@@ -45,7 +45,7 @@ export const scroll = {
           scroll.closePullDown();
         }
       },
-      deep: true
+      deep: true,
     },
     pullUpLoadObj: {
       handler(val) {
@@ -56,11 +56,11 @@ export const scroll = {
           scroll.closePullUp();
         }
       },
-      deep: true
+      deep: true,
     },
     startY() {
       this.rebuildScroll();
-    }
+    },
   },
   methods: {
     // 下拉刷新上拉加载函数
@@ -111,7 +111,7 @@ export const scroll = {
         this.$refs.scroll.destroy();
         this.$refs.scroll.initScroll();
       });
-    }
+    },
   },
   data() {
     return {
@@ -122,18 +122,18 @@ export const scroll = {
       pullDownRefreshStop: 40,
       pullUpLoad: true,
       pullUpLoadThreshold: 0,
-      pullUpLoadMoreTxt: "",
-      pullUpLoadNoMoreTxt: "我也是有底线的~",
+      pullUpLoadMoreTxt: '',
+      pullUpLoadNoMoreTxt: '我也是有底线的~',
       startY: 0,
       scrollToX: 0,
       scrollToY: 0,
       scrollToTime: 700,
-      scrollToEasing: "bounce",
-      scrollToEasingOptions: ["bounce", "swipe", "swipeBounce"],
+      scrollToEasing: 'bounce',
+      scrollToEasingOptions: ['bounce', 'swipe', 'swipeBounce'],
       listenScroll: true,
       listenScrollEnd: true,
       listenBeforeScroll: true,
-      posY: 0
+      posY: 0,
     };
-  }
+  },
 };

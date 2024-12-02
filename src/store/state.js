@@ -1,5 +1,6 @@
-import { playMode } from "config/playmode";
-import { loadFavorite, loadPlay } from "common/scripts/cache";
+import { loadFavorite, loadPlay } from 'common/scripts/cache';
+import { playMode } from 'config/playmode';
+
 const state = {
   singer: {},
   // 播放暂停
@@ -23,6 +24,6 @@ const state = {
   // 播放历史
   playHistory: loadPlay(),
   // 我的收藏
-  favoriteList: loadFavorite()
+  favoriteList: loadFavorite(),
 };
 export default state;

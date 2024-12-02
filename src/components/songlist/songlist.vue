@@ -4,10 +4,7 @@
     <ul class="list">
       <li v-for="(item, index) in list" :key="index">
         <router-link :to="{ path: '/playlist', query: { id: item.id } }">
-          <img
-            v-lazy="item.coverImgUrl || item.picUrl"
-            :alt="item.descriptioon || item.copywriter"
-          />
+          <img v-lazy="item.coverImgUrl || item.picUrl" :alt="item.descriptioon || item.copywriter" />
           <div class="name">{{ item.name }}</div>
         </router-link>
       </li>
@@ -20,26 +17,25 @@ export default {
   props: {
     list: {
       default: [],
-      type: Array
+      type: Array,
     },
     title: {
       type: String,
-      default: "标题"
-    }
+      default: '标题',
+    },
   },
   components: {},
-  name: "",
+  name: '',
   data() {
     return {};
   },
   methods: {},
   created() {},
-  mounted() {}
+  mounted() {},
 };
 </script>
 
-<style scoped lang='less'>
-@import url(~common/styles/variable.less);
+<style scoped lang="scss">
 .songlist {
   padding: 0 32px;
   .list {
@@ -62,7 +58,7 @@ export default {
         div {
           line-height: 40px;
           padding: 10px 0;
-          font-size: @font-size-large-x;
+          font-size: $font-size-large-x;
         }
       }
     }

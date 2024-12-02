@@ -1,13 +1,7 @@
 <template>
   <div class="music-list">
     <ul class="list">
-      <li
-        v-for="(song, index) in list"
-        @click="toPlay(song, index)"
-        :key="index"
-        :class="{ active: currentIndex == index }"
-        class="nowrap"
-      >
+      <li v-for="(song, index) in list" @click="toPlay(song, index)" :key="index" :class="{ active: currentIndex === index }" class="nowrap">
         <div class="index" v-html="setIndexText(index)"></div>
         <div class="song">
           <div class="name nowrap">{{ song.name }}</div>
@@ -23,25 +17,25 @@ export default {
   props: {
     list: {
       type: Array,
-      default: []
+      default: [],
     },
     currentIndex: {
       type: Number,
-      default: -1
-    }
+      default: -1,
+    },
   },
   components: {},
-  name: "",
+  name: '',
   computed: {
     setIndexText() {
-      return index => {
-        if (this.currentIndex == index) {
+      return (index) => {
+        if (this.currentIndex === index) {
           return '<i class="icon-current-play"></i>';
         } else {
           return index + 1;
         }
       };
-    }
+    },
   },
   data() {
     return {};
@@ -52,16 +46,15 @@ export default {
         this.$listeners.toPlay(song, index);
         return;
       }
-      this.$emit("toPlay", song, index);
-    }
+      this.$emit('toPlay', song, index);
+    },
   },
   created() {},
-  mounted() {}
+  mounted() {},
 };
 </script>
 
-<style scoped lang='less'>
-@import url(~common/styles/variable.less);
+<style scoped lang="scss">
 .music-list {
   padding: 0 32px;
   .list {
@@ -69,12 +62,12 @@ export default {
       height: 120px;
       display: flex;
       justify-content: flex-start;
-      border-bottom: solid 1px @border-color;
+      border-bottom: solid 1px $border-color;
       position: relative;
       .index {
         line-height: 120px;
         padding-right: 40px;
-        font-size: @font-size-9;
+        font-size: $font-size-9;
       }
       .song {
         display: flex;
@@ -82,16 +75,16 @@ export default {
         margin: auto 0;
         .name {
           width: 600px;
-          font-size: @font-size-9;
+          font-size: $font-size-9;
         }
         .author {
           padding-top: 10px;
-          font-size: @font-size-large-x;
-          color: @text-subtitle;
+          font-size: $font-size-large-x;
+          color: $text-color;
         }
       }
       &.active {
-        color: @red;
+        color: $red;
         .index {
           margin-left: -8px;
         }

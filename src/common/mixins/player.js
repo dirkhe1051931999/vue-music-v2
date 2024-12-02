@@ -1,14 +1,14 @@
-import { mapGetters, mapMutations, mapActions } from "vuex";
-import { playMode } from "config/playmode";
-import { shuffle } from "common/scripts/util";
+import { mapGetters, mapMutations, mapActions } from 'vuex';
+import { playMode } from 'config/playmode';
+import { shuffle } from 'common/scripts/util';
 
 export const playerMixin = {
   computed: {
     // 播放模式icon
     iconMode() {
-      return this.mode == playMode.sequence ? "icon-sequence" : this.mode == playMode.loop ? "icon-loop" : "icon-random";
+      return this.mode === playMode.sequence ? 'icon-sequence' : this.mode === playMode.loop ? 'icon-loop' : 'icon-random';
     },
-    ...mapGetters(["sequenceList", "playlist", "currentSong", "mode", "favoriteList"])
+    ...mapGetters(['sequenceList', 'playlist', 'currentSong', 'mode', 'favoriteList']),
   },
   methods: {
     // 更改播放模式
@@ -16,7 +16,7 @@ export const playerMixin = {
       const mode = (this.mode + 1) % 3;
       this.setPlayMode(mode);
       let list = null;
-      if (mode == playMode.random) {
+      if (mode === playMode.random) {
         list = shuffle(this.sequenceList);
       } else {
         list = this.sequenceList;
@@ -37,10 +37,10 @@ export const playerMixin = {
     isFavorite(song) {},
     // 更改vuex状态
     ...mapMutations({
-      setPlayingState: "SET_PLAYING_STATE",
-      setCurrentIndex: "SET_CURRENT_INDEX",
-      setPlayMode: "SET_PLAY_MODE",
-      setPlayList: "SET_PLAYLIST"
-    })
-  }
+      setPlayingState: 'SET_PLAYING_STATE',
+      setCurrentIndex: 'SET_CURRENT_INDEX',
+      setPlayMode: 'SET_PLAY_MODE',
+      setPlayList: 'SET_PLAYLIST',
+    }),
+  },
 };

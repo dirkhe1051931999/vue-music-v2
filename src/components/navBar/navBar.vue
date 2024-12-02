@@ -16,59 +16,58 @@ export default {
   props: {
     showTitle: {
       type: Boolean,
-      default: true
+      default: true,
     },
     transparent: {
       type: Boolean,
-      default: false
+      default: false,
     },
     title: {
       type: String,
-      default: ""
+      default: '',
     },
     icon: {
       type: String,
-      default: "icon-back"
+      default: 'icon-back',
     },
     iconColor: {
       type: String,
-      default: ""
+      default: '',
     },
     titleColor: {
       type: String,
-      default: ""
+      default: '',
     },
     listenBack: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
-  name: "",
+  name: '',
   data() {
     return {};
   },
   methods: {
     back() {
-      this.listenBack && this.$emit("navBack");
+      this.listenBack && this.$emit('navBack');
       !this.listenBack && this.$router.back();
-    }
+    },
   },
-  mounted() {}
+  mounted() {},
 };
 </script>
 
-<style scoped lang='less'>
-@import "~common/styles/variable.less";
+<style scoped lang="scss">
 .navbar {
   position: relative;
   .container {
-    font-size: @font-size-large;
+    font-size: $font-size-large;
     width: 100%;
     box-sizing: border-box;
     padding: 0 32px;
     height: 72px;
     line-height: 72px;
-    background: @red;
+    background: $red;
     display: flex;
     color: #ffffff;
     .left {

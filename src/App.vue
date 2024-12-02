@@ -5,14 +5,14 @@
   </div>
 </template>
 <script>
-import Play from "views/playPage/play";
+import Play from 'views/playPage/play';
 export default {
   components: {
-    Play
-  }
+    Play,
+  },
 };
 </script>
-<style lang="less">
+<style lang="scss">
 .page {
   position: fixed;
   left: 0;
@@ -26,12 +26,10 @@ export default {
 }
 .slide-left-enter,
 .slide-right-leave-active {
-  -webkit-transform: translate(100%, 0);
   transform: translate(100%, 0);
 }
 .slide-left-leave-active,
 .slide-right-enter {
-  -webkit-transform: translate(-100%, 0);
   transform: translate(-100% 0);
 }
 </style>

@@ -18,7 +18,7 @@
 <script>
 export default {};
 </script>
-<style lang="less" scoped>
+<style lang="scss" scoped>
 .banner {
   width: 100%;
   box-sizing: border-box;

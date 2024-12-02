@@ -1,81 +1,82 @@
-import Vue from "vue";
-import Router from "vue-router";
+import Vue from 'vue';
+import Router from 'vue-router';
+
 Vue.use(Router);
-Router.prototype.goBack = function() {
+Router.prototype.goBack = function () {
   this.isBack = true;
   window.history.go(-1);
 };
 export default new Router({
   routes: [
     {
-      path: "/",
-      redirect: "/index"
+      path: '/',
+      redirect: '/index',
     },
     {
-      path: "/index",
-      name: "Recommend",
-      component: () => import("views/recommendPage/index"),
+      path: '/index',
+      name: 'Recommend',
+      component: () => import('views/recommendPage/index'),
       meta: {
-        name: ""
+        name: '',
       },
       children: [
         {
-          path: "privatefm",
-          name: "PrivateFM",
-          component: () => import("views/recommendPage/privateFM"),
+          path: 'privatefm',
+          name: 'PrivateFM',
+          component: () => import('views/recommendPage/privateFM'),
           meta: {
-            name: "私人FM"
-          }
+            name: '私人FM',
+          },
         },
         {
-          path: "dailyrecommend",
-          name: "DailyRecommend",
-          component: () => import("views/recommendPage/dailyRecommend"),
+          path: 'dailyrecommend',
+          name: 'DailyRecommend',
+          component: () => import('views/recommendPage/dailyRecommend'),
           meta: {
-            name: "每日推荐"
-          }
+            name: '每日推荐',
+          },
         },
         {
-          path: "song",
-          name: "Song",
-          component: () => import("views/recommendPage/song"),
+          path: 'song',
+          name: 'Song',
+          component: () => import('views/recommendPage/song'),
           meta: {
-            name: "歌单"
-          }
+            name: '歌单',
+          },
         },
         {
-          path: "rank",
-          name: "Rank",
-          component: () => import("views/recommendPage/rank"),
+          path: 'rank',
+          name: 'Rank',
+          component: () => import('views/recommendPage/rank'),
           meta: {
-            name: "排行榜"
-          }
-        }
-      ]
+            name: '排行榜',
+          },
+        },
+      ],
     },
     {
-      path: "/search",
-      name: "Search",
+      path: '/search',
+      name: 'Search',
       meta: {
-        name: "搜索"
+        name: '搜索',
       },
-      component: () => import("views/searchPage/index")
+      component: () => import('views/searchPage/index'),
     },
     {
-      path: "/user",
-      name: "User",
+      path: '/user',
+      name: 'User',
       meta: {
-        name: "个人中心"
+        name: '个人中心',
       },
-      component: () => import("views/userCenterPage/index")
+      component: () => import('views/userCenterPage/index'),
     },
     {
-      path: "/playlist",
-      name: "Playlist",
+      path: '/playlist',
+      name: 'Playlist',
       meta: {
-        name: "播放列表"
+        name: '播放列表',
       },
-      component: () => import("views/playlistPage/playlist")
-    }
-  ]
+      component: () => import('views/playlistPage/playlist'),
+    },
+  ],
 });

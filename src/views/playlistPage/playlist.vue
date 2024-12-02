@@ -17,64 +17,56 @@
     </div>
     <div class="bg-layer" ref="layer"></div>
     <div class="list" ref="list">
-      <scroll
-        ref="scroll"
-        class="scroll"
-        :data="songs"
-        v-if="songs.length > 0"
-        :probeType="probeType"
-        listenScroll
-        @scroll="scroll"
-      >
+      <scroll ref="scroll" class="scroll" :data="songs" v-if="songs.length > 0" :probeType="probeType" listenScroll @scroll="scroll">
         <Musiclist :list="songs" @toPlay="toPlay" />
       </scroll>
-      <Loading1 v-if="songs.length == 0" class="loading-list" />
+      <Loading1 v-if="songs.length === 0" class="loading-list" />
     </div>
   </div>
 </template>
 
 <script>
-import { scroll } from "common/mixins/scroll";
-import moment from "moment";
-import api from "api/api";
-import { catchError } from "api/catchError";
-import { prefixStyle } from "common/scripts/dom";
-import { createSong } from "common/scripts/song.class";
-import { mapActions, mapMutations, mapGetters } from "vuex";
+import { scroll } from 'common/mixins/scroll';
+import moment from 'moment';
+import api from 'api/api';
+import { catchError } from 'api/catchError';
+import { prefixStyle } from 'common/scripts/dom';
+import { createSong } from 'common/scripts/song.class';
+import { mapActions, mapMutations, mapGetters } from 'vuex';
 const RESERVED_HEIGHT = 72;
 const heightMiniPlayer = 60;
-const transform = prefixStyle("transform");
+const transform = prefixStyle('transform');
 export default {
   components: {
-    NavBar: () => import("components/navBar/navBar"),
-    Scroll: () => import("components/scroll/scroll"),
-    Musiclist: () => import("components/musiclist/musiclist")
+    NavBar: () => import('components/navBar/navBar'),
+    Scroll: () => import('components/scroll/scroll'),
+    Musiclist: () => import('components/musiclist/musiclist'),
   },
-  name: "",
+  name: '',
   data() {
     return {
       id: 0,
       probeType: 3,
-      coverImgUrl: "",
-      playListTitle: "",
-      updateTime: "",
+      coverImgUrl: '',
+      playListTitle: '',
+      updateTime: '',
       songs: [],
       trackCount: 0,
-      subscribedCount: "",
-      scrollY: 0
+      subscribedCount: '',
+      scrollY: 0,
     };
   },
   computed: {
-    ...mapGetters(["fullScreen"]),
+    ...mapGetters(['fullScreen']),
     collectCount() {
-      return count => {
+      return (count) => {
         const unit = 10000;
         return `+ 收藏 (${parseInt(count / 1000).toFixed(1)}万)`;
       };
     },
     bgStyle() {
       return `background-image:url(${this.coverImgUrl})`;
-    }
+    },
   },
   watch: {
     scrollY(newY) {
@@ -87,11 +79,11 @@ export default {
     },
     // 兼容迷你播放器高度
     fullScreen(newFull) {
-      if (!newFull && $(".mini-player").height()) {
+      if (!newFull && $('.mini-player').height()) {
         this.$refs.list.style.bottom = `${heightMiniPlayer}px`;
         this.$refs.scroll && this.$refs.scroll.refresh();
       }
-    }
+    },
   },
   methods: {
     scroll(pos) {
@@ -101,21 +93,19 @@ export default {
       this.id = this.$route.query.id;
       const [error, result] = await catchError(api.getPlayListDetail(this.id));
       if (error) {
-        this.$dialog.toast({ mes: "网络异常", timeout: 1000 });
+        this.$dialog.toast({ mes: '网络异常', timeout: 1000 });
         return;
       }
-      if (result.code == 200) {
+      if (result.code === 200) {
         const { playlist } = result;
         this.coverImgUrl = playlist.coverImgUrl;
         this.playListTitle = playlist.name;
-        this.updateTime = moment(playlist.updateTime)
-          .startOf("day")
-          .fromNow();
+        this.updateTime = moment(playlist.updateTime).startOf('day').fromNow();
         this.songs = this.normalizeSongs(playlist.tracks, playlist.name);
         this.trackCount = playlist.trackCount;
         this.subscribedCount = playlist.subscribedCount;
         // 兼容迷你播放器高度
-        if (!this.fullScreen && $(".mini-player").height()) {
+        if (!this.fullScreen && $('.mini-player').height()) {
           this.$refs.list.style.bottom = `${heightMiniPlayer}px`;
           this.$refs.scroll && this.$refs.scroll.refresh();
         }
@@ -132,8 +122,8 @@ export default {
             album: album,
             duration: song.dt,
             image: song.al.picUrl,
-            url: "",
-            lyric: ""
+            url: '',
+            lyric: '',
           })
         );
       }
@@ -143,14 +133,14 @@ export default {
       // 使用vuex存储播放列表
       this.selectPlay({
         list: this.songs,
-        index
+        index,
       });
       this.setFullScreen(true);
     },
-    ...mapActions(["selectPlay"]),
+    ...mapActions(['selectPlay']),
     ...mapMutations({
-      setFullScreen: "SET_FULL_SCREEN"
-    })
+      setFullScreen: 'SET_FULL_SCREEN',
+    }),
   },
   created() {
     this.getPlayListDetail();
@@ -160,12 +150,11 @@ export default {
     this.minTranslateY = -this.imageHeight + RESERVED_HEIGHT;
     this.$refs.list.style.top = `${this.$refs.bgImage.clientHeight}px`;
     // 发现有迷你播放器，设置bottom
-  }
+  },
 };
 </script>
 
-<style scoped lang='less'>
-@import url(~common/styles/variable.less);
+<style scoped lang="scss">
 .play-list {
   .nav {
     position: absolute;
@@ -182,7 +171,7 @@ export default {
     transform-origin: top;
     background-size: cover;
     .bar {
-      border-bottom: solid 1px @border-color;
+      border-bottom: solid 1px $border-color;
       position: absolute;
       z-index: 100;
       width: 100%;
@@ -195,7 +184,7 @@ export default {
       justify-content: flex-start;
       .play {
         background: #ffffff;
-        font-size: @font-size-7;
+        font-size: $font-size-7;
         border-top-left-radius: 20px;
         width: 60%;
         display: flex;
@@ -204,7 +193,7 @@ export default {
           padding-left: 5%;
           display: inline-block;
           line-height: 80px;
-          font-size: @font-size-9;
+          font-size: $font-size-9;
         }
         .text {
           padding-left: 5%;
@@ -215,9 +204,9 @@ export default {
         border-top-right-radius: 20px;
         width: 40%;
         color: #ffffff;
-        background: @red;
+        background: $red;
         text-align: center;
-        font-size: @font-size-7;
+        font-size: $font-size-7;
       }
     }
     .filter {

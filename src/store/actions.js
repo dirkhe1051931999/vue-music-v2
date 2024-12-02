@@ -1,7 +1,7 @@
-import * as types from "./mutation-type";
-import { playMode } from "config/playmode";
-import { shuffle } from "common/scripts/util";
-import { savePlay, saveFavorite, deleteFavorite } from "common/scripts/cache";
+import * as types from './mutation-type';
+import { playMode } from 'config/playmode';
+import { shuffle } from 'common/scripts/util';
+import { savePlay, saveFavorite, deleteFavorite } from 'common/scripts/cache';
 // 内部方法
 // 返回当前歌曲是否在列表内，在就返回当前索引，否则返回false
 function findIndex(list, song) {
@@ -10,13 +10,13 @@ function findIndex(list, song) {
   });
 }
 // 设置当前播放列表
-export const selectPlay = function({ commit, state }, { list, index }) {
+export const selectPlay = function ({ commit, state }, { list, index }) {
   // 暴力打断引用关系
   list = JSON.parse(JSON.stringify(list));
   // 先设置播放列表
   commit(types.SET_SEQUENCE_LIST, list);
   // 如果是随机
-  if (state.mode == playMode.random) {
+  if (state.mode === playMode.random) {
     // 那么就打乱数组
     let randomList = shuffle(list);
     // 设置当前播放列表：随机，顺序
@@ -35,7 +35,7 @@ export const selectPlay = function({ commit, state }, { list, index }) {
   commit(types.SET_PLAYING_STATE, true);
 };
 // 播放控制台的播放模式
-export const randomPlay = function({ commit }, { list }) {
+export const randomPlay = function ({ commit }, { list }) {
   // 设置播放模式
   commit(types.SET_PLAY_MODE, playMode.random);
   // 设置当前播放列表
@@ -52,11 +52,11 @@ export const randomPlay = function({ commit }, { list }) {
   commit(types.SET_PLAYING_STATE, true);
 };
 // 设置播放历史
-export const savePlayHistory = function({ commit }, song) {
+export const savePlayHistory = function ({ commit }, song) {
   commit(types.SET_PLAY_HISTORY, savePlay(song));
 };
 // 往播放列表插入歌曲
-export const insertSong = function({ commit, state }, song) {
+export const insertSong = function ({ commit, state }, song) {
   // 获取播放列表，有可能是随机的播放列表
   let playlist = state.playlist.slice();
   // 获取播放列表，不是随机的
@@ -113,7 +113,7 @@ export const insertSong = function({ commit, state }, song) {
   commit(types.SET_PLAYING_STATE, true);
 };
 // 删除播放列表的数据
-export const deleteSong = function({ commit, state }, song) {
+export const deleteSong = function ({ commit, state }, song) {
   // 包含随机的播放列表
   let playlist = state.playlist.slice();
   // 不包含随机的播放列表
@@ -129,7 +129,7 @@ export const deleteSong = function({ commit, state }, song) {
   // 删除
   sequenceList.splice(sIndex, 1);
   // 如果当前播放的的歌曲在删掉歌曲之后 或者 删除去最后一首歌
-  if (currentIndex > pIndex || currentIndex == playlist.length) {
+  if (currentIndex > pIndex || currentIndex === playlist.length) {
     currentIndex--;
   }
   // 设置包含随机的播放列表
@@ -147,15 +147,15 @@ export const deleteSong = function({ commit, state }, song) {
   }
 };
 // 播放列表全部删除
-export const deleteSongList = function({ commit }) {
+export const deleteSongList = function ({ commit }) {
   commit(types.SET_PLAYLIST, []);
   commit(types.SET_SEQUENCE_LIST, []);
   commit(types.SET_CURRENT_INDEX, -1);
   commit(types.SET_PLAYING_STATE, false);
 };
-export const saveFavoriteList = function({ commit }, song) {
+export const saveFavoriteList = function ({ commit }, song) {
   commit(types.SET_FAVORITE_LIST, saveFavorite(song));
 };
-export const deleteFavoriteList = function({ commit }, song) {
+export const deleteFavoriteList = function ({ commit }, song) {
   commit(types.SET_FAVORITE_LIST, deleteFavorite(song));
 };

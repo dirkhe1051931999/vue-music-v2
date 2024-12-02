@@ -14,14 +14,13 @@ export default {
   name: COMPONENT_NAME
 };
 </script>
-<style lang="less">
-@import url(~common/styles/variable.less);
+<style lang="scss">
 .spinner {
   height: 60px;
   text-align: center;
   font-size: 10px;
   div {
-    background-color: @red;
+    background-color: $red;
     height: 100%;
     width: 6px;
     display: inline-block;

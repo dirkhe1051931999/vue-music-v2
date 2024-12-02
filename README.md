@@ -200,7 +200,7 @@
      // 先设置播放列表
      commit(types.SET_SEQUENCE_LIST, list);
      // 如果是随机
-     if (state.mode == playMode.random) {
+     if (state.mode === playMode.random) {
        // 那么就打乱数组
        let randomList = shuffle(list);
        // 设置当前播放列表：随机，顺序

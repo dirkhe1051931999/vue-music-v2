@@ -2,13 +2,7 @@
   <div class="progress-bar" ref="progressBar" @click="progressClick">
     <div class="bar-inner">
       <div class="progress" ref="progress"></div>
-      <div
-        class="progress-btn-wrapper"
-        ref="progressBtn"
-        @touchstart.prevent="progressTouchStart"
-        @touchmove.prevent="progressTouchMove"
-        @touchend="progressTouchEnd"
-      >
+      <div class="progress-btn-wrapper" ref="progressBtn" @touchstart.prevent="progressTouchStart" @touchmove.prevent="progressTouchMove" @touchend="progressTouchEnd">
         <div class="progress-btn"></div>
       </div>
     </div>
@@ -16,18 +10,18 @@
 </template>
 
 <script>
-import { prefixStyle } from "common/scripts/dom";
+import { prefixStyle } from 'common/scripts/dom';
 const progressBtnWidth = 16;
-const transform = prefixStyle("transform");
+const transform = prefixStyle('transform');
 export default {
   props: {
     percent: {
       type: Number,
-      default: 0
-    }
+      default: 0,
+    },
   },
   components: {},
-  name: "",
+  name: '',
   watch: {
     // 进度条实时刷新
     percent(newPercent) {
@@ -37,7 +31,7 @@ export default {
         const offsetWidth = newPercent * barWidth;
         this._offsetWidth(offsetWidth);
       }
-    }
+    },
   },
   data() {
     return {};
@@ -64,10 +58,7 @@ export default {
       }
       // 横向偏移量
       const delatX = e.touches[0].pageX - this.touch.startX;
-      const offsetWidth = Math.min(
-        this.$refs.progressBar.clientWidth - progressBtnWidth,
-        Math.max(0, this.touch.left + delatX)
-      );
+      const offsetWidth = Math.min(this.$refs.progressBar.clientWidth - progressBtnWidth, Math.max(0, this.touch.left + delatX));
       this._offsetWidth(offsetWidth);
     },
     progressTouchEnd(e) {
@@ -78,26 +69,23 @@ export default {
     _triggerPercent() {
       const barWidth = this.$refs.progressBar.clientWidth - progressBtnWidth;
       const percent = this.$refs.progress.clientWidth / barWidth;
-      this.$emit("percentChange", percent);
+      this.$emit('percentChange', percent);
     },
     _offsetWidth(offsetWidth) {
       this.$refs.progress.style.width = `${offsetWidth}px`;
-      this.$refs.progressBtn.style[
-        transform
-      ] = `translate3d(${offsetWidth}px,0,0)`;
-    }
+      this.$refs.progressBtn.style[transform] = `translate3d(${offsetWidth}px,0,0)`;
+    },
   },
   created() {
     setTimeout(() => {
       this.touch = {};
     });
   },
-  mounted() {}
+  mounted() {},
 };
 </script>
 
-<style scoped lang='less'>
-@import "~common/styles/variable.less";
+<style scoped lang="scss">
 .progress-bar {
   height: 60px;
   .bar-inner {
@@ -123,9 +111,9 @@ export default {
         box-sizing: border-box;
         width: 32px;
         height: 32px;
-        border: 6px solid @border-color;
+        border: 6px solid $border-color;
         border-radius: 50%;
-        background: @play-op-color;
+        background: $play-op-color;
       }
     }
   }

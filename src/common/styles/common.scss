@@ -1,0 +1,53 @@
+@import "variable.scss";
+
+body,
+html {
+  line-height: 1;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  background: $background-color;
+  color: $text-color;
+}
+
+body {
+  font-family: 'Noto Sans SC', sans-serif !important;
+}
+
+.nowrap {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.nowrapover2 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+}
+
+.list-title {
+  font-size: $font-size-large;
+  font-weight: normal;
+  padding: 25px 0;
+
+  &::before {
+    content: "";
+    display: inline-block;
+    margin-right: 10px;
+    width: 5px;
+    height: 28px;
+    vertical-align: top;
+    background: $red;
+  }
+}
+
+.loading-list {
+  padding-top: 10%;
+}
+
+.list-over {
+  font-size: $font-size-medium-x;
+  height: 55px;
+  line-height: 55px;
+  text-align: center;
+}

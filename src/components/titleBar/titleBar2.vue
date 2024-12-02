@@ -13,22 +13,21 @@
 <script>
 export default {
   components: {},
-  name: "",
+  name: '',
   data() {
     return {};
   },
   methods: {
     openSearch() {
-      this.$emit("openSearch");
-    }
+      this.$emit('openSearch');
+    },
   },
   created() {},
-  mounted() {}
+  mounted() {},
 };
 </script>
 
-<style scoped lang='less'>
-@import url(~common/styles/variable.less);
+<style scoped lang="scss">
 .container {
   height: 85px;
   line-height: 85px;
@@ -37,7 +36,7 @@ export default {
   box-sizing: border-box;
   justify-content: space-between;
   .left {
-    font-size: @font-size-large;
+    font-size: $font-size-large;
   }
   .search {
     text-align: center;
