@@ -1,18 +1,48 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,viewport-fit=cover,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
-    <title>vue仿网易云音乐🎵</title>
-    <script src="https://cdn.bootcss.com/sprint/0.9.2/sprint.min.js"></script>
-  <style data-vue-ssr-id="150d799e:0">.vue-skeleton-loading{position:fixed;top:0;right:0;bottom:0;left:0;z-index:99999;font-size:1.6vw;background:#fff}@-webkit-keyframes backpos{from{background-position-x:-26.666667vw}to{background-position-x:calc(26.666667vw + 100%)}}@keyframes backpos{from{background-position-x:-26.666667vw}to{background-position-x:calc(26.666667vw + 100%)}}.vue-skeleton-loading .skeleton-bac-animation{position:absolute;z-index:auto;width:100%;height:100%;background:-webkit-gradient(linear,left top,right top,from(rgba(255,255,255,0)),color-stop(50%,rgba(255,255,255,.5)),color-stop(80%,rgba(255,255,255,0)));background:linear-gradient(to right,rgba(255,255,255,0),rgba(255,255,255,.5) 50%,rgba(255,255,255,0) 80%);background-repeat:no-repeat;background-size:30% 100%;-webkit-animation:backpos .9s ease-in-out 0s infinite;animation:backpos .9s ease-in-out 0s infinite}.vue-skeleton-loading .skeleton-bac-content{overflow:hidden}.vue-skeleton-column{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center}.vue-skeleton-row{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.vue-skeleton-square-wrap{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column}.vue-skeleton-square-wrap .vue-skeleton-square{width:100%}</style><style data-vue-ssr-id="0e5df668:0">.banner[data-v-121cef6d]{width:100%;-webkit-box-sizing:border-box;box-sizing:border-box;background:#e9e7ef}.margin[data-v-121cef6d]{margin-left:2.666667vw}</style></head>
-  <body>
-    <noscript>
-      <strong>We're sorry but vue2.6 doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
-    </noscript>
-    <div id="app">
-      <div data-server-rendered="true" data-v-121cef6d><div class="vue-skeleton-loading" data-v-121cef6d><div class="skeleton-bac-animation"></div> <div class="skeleton-bac-content"><div class="vue-skeleton-row" style="width:auto;padding:10px;justify-content:flex-start" data-v-121cef6d><div class="vue-skeleton-square-wrap banner" data-v-121cef6d><div class="vue-skeleton-square" style="background-color:#e9e7ef;width:100%;height:200px;margin:0"></div></div></div> <div class="vue-skeleton-row" style="width:auto;padding:10px;justify-content:flex-start" data-v-121cef6d><div class="vue-skeleton-square-wrap" data-v-121cef6d><div class="vue-skeleton-square" style="background-color:#e9e7ef;width:90px;height:90px;margin:0"></div></div> <div class="vue-skeleton-square-wrap margin" data-v-121cef6d><div class="vue-skeleton-square" style="background-color:#e9e7ef;width:90px;height:90px;margin:0"></div></div> <div class="vue-skeleton-square-wrap margin" data-v-121cef6d><div class="vue-skeleton-square" style="background-color:#e9e7ef;width:90px;height:90px;margin:0"></div></div></div><div class="vue-skeleton-row" style="width:auto;padding:10px;justify-content:flex-start" data-v-121cef6d><div class="vue-skeleton-square-wrap" data-v-121cef6d><div class="vue-skeleton-square" style="background-color:#e9e7ef;width:90px;height:90px;margin:0"></div></div> <div class="vue-skeleton-square-wrap margin" data-v-121cef6d><div class="vue-skeleton-square" style="background-color:#e9e7ef;width:90px;height:90px;margin:0"></div></div> <div class="vue-skeleton-square-wrap margin" data-v-121cef6d><div class="vue-skeleton-square" style="background-color:#e9e7ef;width:90px;height:90px;margin:0"></div></div></div><div class="vue-skeleton-row" style="width:auto;padding:10px;justify-content:flex-start" data-v-121cef6d><div class="vue-skeleton-square-wrap" data-v-121cef6d><div class="vue-skeleton-square" style="background-color:#e9e7ef;width:90px;height:90px;margin:0"></div></div> <div class="vue-skeleton-square-wrap margin" data-v-121cef6d><div class="vue-skeleton-square" style="background-color:#e9e7ef;width:90px;height:90px;margin:0"></div></div> <div class="vue-skeleton-square-wrap margin" data-v-121cef6d><div class="vue-skeleton-square" style="background-color:#e9e7ef;width:90px;height:90px;margin:0"></div></div></div></div></div></div>
-    </div>
-  </body>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>网易云音乐 API</title>
+</head>
+<body>
+  <h1>网易云音乐 API</h1>
+  当你看到这个页面时,这个服务已经成功跑起来了~
+  <a href="https://binaryify.github.io/NeteaseCloudMusicApi/">查看文档</a>
+  <h2>例子:</h2>
+  <ul>
+    <li>1. <a href="/search?keywords=海阔天空">搜索</a></li>
+    <li>2. <a href="/comment/music?id=186016&limit=1">歌曲评论</a></li>
+    <li>3. <a href="/dj/program?rid=336355127">电台节目</a></li>
+  </ul>
+  <style>
+    html,body{
+      height: 100vh;
+      width: 100vw;
+      margin: 0;
+      padding: 0;
+      background: #ffffff;
+      text-align: center;
+      margin-top:30px;
+      overflow: hidden;
+    }
+    *{
+      color:rgb(100,100,100);
+    }
+    a{
+      color:#42b983;
+    }
+    ul,li{
+      margin: 0;
+    }
+    ul{
+      margin-left: -40px;
+      line-height: 30px;
+    }
+    li{
+      list-style: none;
+    }
+  </style>
+</body>
 </html>
