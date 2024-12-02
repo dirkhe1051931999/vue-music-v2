@@ -26,13 +26,13 @@
 </template>
 
 <script>
-import { scroll } from 'common/mixins/scroll';
-import moment from 'moment';
 import api from 'api/api';
 import { catchError } from 'api/catchError';
 import { prefixStyle } from 'common/scripts/dom';
 import { createSong } from 'common/scripts/song.class';
-import { mapActions, mapMutations, mapGetters } from 'vuex';
+import moment from 'moment';
+import { mapActions, mapGetters, mapMutations } from 'vuex';
+
 const RESERVED_HEIGHT = 72;
 const heightMiniPlayer = 60;
 const transform = prefixStyle('transform');
@@ -162,6 +162,7 @@ export default {
     top: 0;
     z-index: 100;
   }
+
   .bg-image {
     position: relative;
     top: 0;
@@ -170,6 +171,7 @@ export default {
     height: 560px;
     transform-origin: top;
     background-size: cover;
+
     .bar {
       border-bottom: solid 1px $border-color;
       position: absolute;
@@ -182,6 +184,7 @@ export default {
       line-height: 80px;
       display: flex;
       justify-content: flex-start;
+
       .play {
         background: #ffffff;
         font-size: $font-size-7;
@@ -189,17 +192,20 @@ export default {
         width: 60%;
         display: flex;
         justify-content: flex-start;
+
         .icon-play {
           padding-left: 5%;
           display: inline-block;
           line-height: 80px;
           font-size: $font-size-9;
         }
+
         .text {
           padding-left: 5%;
           text-align: left;
         }
       }
+
       .collect {
         border-top-right-radius: 20px;
         width: 40%;
@@ -209,6 +215,7 @@ export default {
         font-size: $font-size-7;
       }
     }
+
     .filter {
       position: absolute;
       top: 0;
@@ -218,11 +225,13 @@ export default {
       background: rgba(0, 0, 0, 0.1);
     }
   }
+
   .bg-layer {
     position: relative;
     height: 100%;
     background: #fff;
   }
+
   .list {
     position: fixed;
     top: 0;

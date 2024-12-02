@@ -195,10 +195,6 @@ export default {
     disableClass() {
       return this.songReady ? '' : 'disable';
     },
-    // 播放模式icon
-    modeIcon() {
-      return this.mode === playMode.sequence ? 'icon-sequence' : this.mode === playMode.loop ? 'icon-loop' : 'icon-random';
-    },
     // 收藏的icon
     favoriteIcon() {
       if (this.isFavorite(this.currentSong)) {
@@ -211,7 +207,6 @@ export default {
     // 接口：接口集合
     getMusic(id) {
       if (!id) {
-        this.$router.back();
         return;
       }
       this.getSong(id);

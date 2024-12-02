@@ -6,6 +6,7 @@
 </template>
 <script>
 import Play from 'views/playPage/play';
+
 export default {
   components: {
     Play,
@@ -24,10 +25,12 @@ export default {
   z-index: 100;
   transition: all 0.5s cubic-bezier(0.55, 0, 0.1, 0.8);
 }
+
 .slide-left-enter,
 .slide-right-leave-active {
   transform: translate(100%, 0);
 }
+
 .slide-left-leave-active,
 .slide-right-enter {
   transform: translate(-100% 0);

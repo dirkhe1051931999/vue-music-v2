@@ -7,6 +7,8 @@ Router.prototype.goBack = function () {
   window.history.go(-1);
 };
 export default new Router({
+  mode: 'hash',
+  base: process.env.NODE_ENV === 'production' ? '/163-music' : '/',
   routes: [
     {
       path: '/',
