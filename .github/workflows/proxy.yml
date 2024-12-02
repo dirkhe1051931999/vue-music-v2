@@ -22,7 +22,7 @@ jobs:
       - name: Install dependencies
         run: yarn
 
-      - name: Build Astro project
+      - name: Build project
         run: yarn build
 
       - name: Clear destination directory
