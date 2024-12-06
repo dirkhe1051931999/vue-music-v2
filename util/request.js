@@ -3,46 +3,70 @@ const request = require('request');
 const queryString = require('querystring');
 const PacProxyAgent = require('pac-proxy-agent');
 const zlib = require('zlib');
-const randomUseragent = require('random-useragent');
+const CryptoJS = require('crypto-js');
+const { cookieToJson, getURI, cookieJsonToString, toBoolean } = require('./index');
+const { CONFIG } = require('../data/config');
+const { resolve } = require('path');
+const { readFileSync, existsSync } = require('fs');
 
-request.debug = process.env.NODE_ENV === 'development';
+request.debug = false;
 
-const formatCookie = (cookie) => {
-  if (typeof cookie === 'object') {
-    return Object.keys(cookie)
-      .map((key) => {
-        const encodedKey = encodeURIComponent(key);
-        const encodedValue = encodeURIComponent(cookie[key]);
-        return `${encodedKey}=${encodedValue}`;
-      })
-      .join('; ');
+const formatCookie = (cookie, url) => {
+  if (typeof cookie === 'string') {
+    cookie = cookieToJson(cookie);
   }
-  return cookie;
+  if (typeof cookie === 'object') {
+    let _ntes_nuid = CryptoJS.lib.WordArray.random(32).toString();
+    let os = CONFIG.osMap[cookie.os] || CONFIG.osMap['iphone'];
+    let deviceIdPath = resolve(__dirname, '../', 'deviceid');
+    let tokenPath = resolve(__dirname, '../', 'anonymous_token');
+    const anonymous_token = existsSync(tokenPath) ? readFileSync(tokenPath, 'utf-8').split('\n')[0] : '';
+    let deviceId = existsSync(deviceIdPath) ? readFileSync(deviceIdPath, 'utf-8').split('\n')[0] : '';
+    let uri = getURI(url);
+    cookie['__remember_me'] = 'true';
+    cookie['ntes_kaola_ad'] = '1';
+    cookie['_ntes_nuid'] = cookie._ntes_nuid || _ntes_nuid;
+    cookie['_ntes_nnid'] = cookie._ntes_nnid || `${_ntes_nuid},${Date.now().toString()}`;
+    cookie['WNMCID'] = cookie.WNMCID || CONFIG.WNMCID;
+    cookie['WEVNSM'] = cookie.WEVNSM || '1.0.0';
+    cookie['osver'] = cookie.osver || os.osver;
+    cookie['deviceId'] = cookie.deviceId || deviceId;
+    cookie['os'] = cookie.os || os.os;
+    cookie['channel'] = cookie.channel || os.channel;
+    cookie['appver'] = cookie.appver || os.appver;
+    if (uri.indexOf('login') === -1) {
+      cookie['NMTID'] = CryptoJS.lib.WordArray.random(16).toString();
+    }
+    if (!cookie.MUSIC_U) {
+      cookie.MUSIC_A = cookie.MUSIC_A || anonymous_token;
+    }
+    return cookieJsonToString(cookie);
+  }
 };
 // 处理不同的加密方式
 const handleCrypto = (options, data, headers, url, method) => {
   switch (options.crypto) {
     case 'weapi': {
+      headers['Referer'] = 'https://music.163.com';
+      headers['User-Agent'] = options.ua || CONFIG.userAgentMap['weapi']['pc'];
       const csrfToken = (headers['Cookie'] || '').match(/_csrf=([^(;|$)]+)/);
       data.csrf_token = csrfToken ? csrfToken[1] : '';
       return {
         data: encrypt.weapi(data),
-        url: url.replace(/\w*api/, 'weapi'),
+        url: 'https://music.163.com/' + options.url.replace(/\w*api/, 'weapi'),
         headers,
       };
     }
     case 'linuxapi': {
+      headers['User-Agent'] = options.ua || CONFIG.userAgentMap['linuxapi']['linux'];
       return {
         data: encrypt.linuxapi({
-          method,
+          method: 'POST',
           url: url.replace(/\w*api/, 'api'),
           params: data,
         }),
         url: 'https://music.163.com/api/linux/forward',
-        headers: {
-          ...headers,
-          'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.90 Safari/537.36',
-        },
+        headers,
       };
     }
     case 'eapi': {
@@ -52,7 +76,7 @@ const handleCrypto = (options, data, headers, url, method) => {
         deviceId: cookie.deviceId,
         appver: cookie.appver || '6.1.1',
         versioncode: cookie.versioncode || '140',
-        mobilename: cookie.mobilename,
+        mobilename: cookie.mobilename || '',
         buildver: cookie.buildver || Date.now().toString().substr(0, 10),
         resolution: cookie.resolution || '1920x1080',
         __csrf: cookie['__csrf'] || '',
@@ -62,27 +86,26 @@ const handleCrypto = (options, data, headers, url, method) => {
           .toString()
           .padStart(4, '0')}`,
       };
-
-      // 添加音乐相关cookie
       if (cookie.MUSIC_U) header.MUSIC_U = cookie.MUSIC_U;
       if (cookie.MUSIC_A) header.MUSIC_A = cookie.MUSIC_A;
-
-      headers.Cookie = Object.keys(header)
-        .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(header[key])}`)
-        .join('; ');
-
+      headers.Cookie = cookieJsonToString(header);
+      headers['User-Agent'] = options.ua || CONFIG.userAgentMap['api']['iphone'];
       data.header = header;
+      data.e_r = options.e_r !== undefined ? options.e_r : data.e_r !== undefined ? data.e_r : false; // 用于加密接口返回值
+      data.e_r = toBoolean(data.e_r);
       return {
         data: encrypt.eapi(options.url, data),
-        url: url.replace(/\w*api/, 'eapi'),
+        url: 'https://interface.music.163.com/' + options.url.replace(/\w*api/, 'eapi'),
         headers,
         encoding: null,
       };
     }
     default:
+      console.log('[ERR]', 'Unknown Crypto:', crypto);
       return { data, url, headers };
   }
 };
+// https://interface.music.163.com/eapi/login/qrcode/client/login
 
 const handleSettings = ({ method, url, headers, data, options }) => {
   const settings = {
@@ -105,10 +128,8 @@ const handleSettings = ({ method, url, headers, data, options }) => {
 const createRequest = (method, url, data, options) => {
   return new Promise((resolve, reject) => {
     let headers = {
-      'User-Agent': randomUseragent.getRandom(),
       'Content-Type': method.toUpperCase() === 'POST' ? 'application/x-www-form-urlencoded' : null,
-      Referer: url.indexOf('music.163.com') !== -1 ? 'https://music.163.com' : null,
-      Cookie: options.cookie ? formatCookie(options.cookie) : null,
+      Cookie: formatCookie(options.cookie || {}, url),
     };
     // 处理加密
     const cryptoResult = handleCrypto(options, data, headers, url, method);
@@ -148,6 +169,9 @@ const createRequest = (method, url, data, options) => {
                       response.body = JSON.parse(_buffer.toString());
                       response.status = res.statusCode;
                     }
+                    if (response.body.code) {
+                      response.body.code = Number(response.body.code);
+                    }
                   } catch (e) {
                     response.body = _buffer.toString();
                     response.status = res.statusCode;
@@ -162,6 +186,9 @@ const createRequest = (method, url, data, options) => {
               default: {
                 response.body = JSON.parse(body);
                 response.status = response.body.code || res.statusCode;
+                if ([201, 302, 400, 502, 800, 801, 802, 803].includes(response.body.code)) {
+                  response.status = response.body.code;
+                }
                 break;
               }
             }

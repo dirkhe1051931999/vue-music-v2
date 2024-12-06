@@ -1,8 +1,15 @@
 // 专辑内容
-
+// /album?id=251406892
 module.exports = (query, request) => {
-    return request(
-        'POST', `https://music.163.com/weapi/v1/album/${query.id}`, {},
-        {crypto: 'weapi', cookie: query.cookie, proxy: query.proxy}
-    )
-}
+  return request(
+    'POST',
+    ``,
+    {},
+    {
+      crypto: 'weapi',
+      cookie: query.cookie,
+      proxy: query.proxy,
+      url: `/api/v1/album/${query.id}`,
+    }
+  );
+};

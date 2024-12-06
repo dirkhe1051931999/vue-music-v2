@@ -1,13 +1,10 @@
 // 已收藏专辑列表
-
+// /album/sublist
 module.exports = (query, request) => {
-    const data = {
-        limit: query.limit || 25,
-        offset: query.offset || 0,
-        total: true
-    }
-    return request(
-        'POST', `https://music.163.com/weapi/album/sublist`, data,
-        {crypto: 'weapi', cookie: query.cookie, proxy: query.proxy}
-    )
-}
+  const data = {
+    limit: query.limit || 25,
+    offset: query.offset || 0,
+    total: true,
+  };
+  return request('POST', `https://music.163.com/weapi/album/sublist`, data, { crypto: 'weapi', cookie: query.cookie, proxy: query.proxy });
+};

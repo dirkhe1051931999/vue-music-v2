@@ -21,13 +21,11 @@ const CryptoUtils = {
 
   rsaEncrypt(buffer, key) {
     buffer = Buffer.concat([Buffer.alloc(128 - buffer.length), buffer]);
-    return crypto.publicEncrypt(
-      { key, padding: crypto.constants.RSA_NO_PADDING }, buffer);
+    return crypto.publicEncrypt({ key, padding: crypto.constants.RSA_NO_PADDING }, buffer);
   },
 
   createSecretKey(size) {
-    return crypto.randomBytes(size).
-      map(n => CRYPTO_CONFIG.base62.charAt(n % 62).charCodeAt());
+    return crypto.randomBytes(size).map((n) => CRYPTO_CONFIG.base62.charAt(n % 62).charCodeAt());
   },
 };
 
@@ -36,22 +34,18 @@ const ApiEncryption = {
   weapi(object) {
     const text = JSON.stringify(object);
     const secretKey = CryptoUtils.createSecretKey(16);
-    const encryptedText = CryptoUtils.aesEncrypt(Buffer.from(text), 'cbc',
-      CRYPTO_CONFIG.presetKey, CRYPTO_CONFIG.iv).toString('base64');
+    const encryptedText = CryptoUtils.aesEncrypt(Buffer.from(text), 'cbc', CRYPTO_CONFIG.presetKey, CRYPTO_CONFIG.iv).toString('base64');
 
     return {
-      params: CryptoUtils.aesEncrypt(Buffer.from(encryptedText), 'cbc',
-        secretKey, CRYPTO_CONFIG.iv).toString('base64'),
-      encSecKey: CryptoUtils.rsaEncrypt(secretKey.reverse(),
-        CRYPTO_CONFIG.publicKey).toString('hex'),
+      params: CryptoUtils.aesEncrypt(Buffer.from(encryptedText), 'cbc', secretKey, CRYPTO_CONFIG.iv).toString('base64'),
+      encSecKey: CryptoUtils.rsaEncrypt(secretKey.reverse(), CRYPTO_CONFIG.publicKey).toString('hex'),
     };
   },
 
   linuxapi(object) {
     const text = JSON.stringify(object);
     return {
-      eparams: CryptoUtils.aesEncrypt(Buffer.from(text), 'ecb',
-        CRYPTO_CONFIG.linuxapiKey, '').toString('hex').toUpperCase(),
+      eparams: CryptoUtils.aesEncrypt(Buffer.from(text), 'ecb', CRYPTO_CONFIG.linuxapiKey, '').toString('hex').toUpperCase(),
     };
   },
 
@@ -62,14 +56,12 @@ const ApiEncryption = {
     const data = `${url}-36cd479b6b5-${text}-36cd479b6b5-${digest}`;
 
     return {
-      params: CryptoUtils.aesEncrypt(Buffer.from(data), 'ecb',
-        CRYPTO_CONFIG.eapiKey, '').toString('hex').toUpperCase(),
+      params: CryptoUtils.aesEncrypt(Buffer.from(data), 'ecb', CRYPTO_CONFIG.eapiKey, '').toString('hex').toUpperCase(),
     };
   },
 
   decrypt(cipherBuffer) {
-    const decipher = crypto.createDecipheriv('aes-128-ecb',
-      CRYPTO_CONFIG.eapiKey, '');
+    const decipher = crypto.createDecipheriv('aes-128-ecb', CRYPTO_CONFIG.eapiKey, '');
     return Buffer.concat([decipher.update(cipherBuffer), decipher.final()]);
   },
 };

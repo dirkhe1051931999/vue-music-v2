@@ -1,11 +1,8 @@
 // 电台节目详情
-
+// /dj/program/detail?id=1367665101
 module.exports = (query, request) => {
-    const data = {
-        id: query.id
-    }
-    return request(
-        'POST', `https://music.163.com/weapi/dj/program/detail`, data,
-        {crypto: 'weapi', cookie: query.cookie, proxy: query.proxy}
-    )
-}
+  const data = {
+    id: query.id,
+  };
+  return request('POST', `https://music.163.com/weapi/dj/program/detail`, data, { crypto: 'weapi', cookie: query.cookie, proxy: query.proxy });
+};

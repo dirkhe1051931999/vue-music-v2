@@ -1,15 +1,16 @@
 // 最新MV
-
+// /mv/first
 module.exports = (query, request) => {
   const data = {
     // 'offset': query.offset || 0,
-    area: query.area || "",
+    area: query.area || '',
     limit: query.limit || 30,
-    total: true
+    total: true,
   };
-  return request("POST", `https://interface.music.163.com/weapi/mv/first`, data, {
-    crypto: "weapi",
+  return request('POST', '', data, {
+    crypto: 'eapi',
     cookie: query.cookie,
-    proxy: query.proxy
+    proxy: query.proxy,
+    url: '/api/mv/first',
   });
 };

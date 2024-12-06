@@ -1,5 +1,5 @@
 // 签到
-
+// daily_signin
 /*
     0为安卓端签到 3点经验, 1为网页签到,2点经验
     签到成功 {'android': {'point': 3, 'code': 200}, 'web': {'point': 2, 'code': 200}}
@@ -8,11 +8,8 @@
 */
 
 module.exports = (query, request) => {
-    const data = {
-        type: query.type || 0
-    }
-    return request(
-        'POST', `https://music.163.com/weapi/point/dailyTask`, data,
-        {crypto: 'weapi', cookie: query.cookie, proxy: query.proxy}
-    )
-}
+  const data = {
+    type: query.type || 0,
+  };
+  return request('POST', `https://music.163.com/weapi/point/dailyTask`, data, { crypto: 'weapi', cookie: query.cookie, proxy: query.proxy });
+};

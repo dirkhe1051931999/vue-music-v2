@@ -1,13 +1,10 @@
 // 热门歌手
-
+// /top/artists?offset=0&limit=30
 module.exports = (query, request) => {
-    const data = {
-        limit: query.limit || 50,
-        offset: query.offset || 0,
-        total: true
-    }
-    return request(
-        'POST', `https://music.163.com/weapi/artist/top`, data,
-        {crypto: 'weapi', cookie: query.cookie, proxy: query.proxy}
-    )
-}
+  const data = {
+    limit: query.limit || 50,
+    offset: query.offset || 0,
+    total: true,
+  };
+  return request('POST', `https://music.163.com/weapi/artist/top`, data, { crypto: 'weapi', cookie: query.cookie, proxy: query.proxy });
+};

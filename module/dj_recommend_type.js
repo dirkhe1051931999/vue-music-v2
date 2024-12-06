@@ -1,5 +1,5 @@
 // 精选电台分类
-
+// /dj/recommend/type?type=453052
 /*
     有声书 10001
     知识技能 453050
@@ -24,11 +24,8 @@
 */
 
 module.exports = (query, request) => {
-    const data = {
-        cateId: query.type
-    }
-    return request(
-        'POST', `https://music.163.com/weapi/djradio/recommend`, data,
-        {crypto: 'weapi', cookie: query.cookie, proxy: query.proxy}
-    )
-}
+  const data = {
+    cateId: query.type,
+  };
+  return request('POST', `https://music.163.com/weapi/djradio/recommend`, data, { crypto: 'weapi', cookie: query.cookie, proxy: query.proxy });
+};

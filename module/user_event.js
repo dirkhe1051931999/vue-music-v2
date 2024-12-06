@@ -1,16 +1,11 @@
 // 用户动态
-
+// /user/event?uid=32953014
 module.exports = (query, request) => {
   const data = {
     getcounts: true,
     time: query.lasttime || -1,
     limit: query.limit || 30,
-    total: false
+    total: false,
   };
-  return request(
-    "POST",
-    `https://music.163.com/weapi/event/get/${query.uid}`,
-    data,
-    { crypto: "weapi", cookie: query.cookie, proxy: query.proxy }
-  );
+  return request('POST', `https://music.163.com/weapi/event/get/${query.uid}`, data, { crypto: 'weapi', cookie: query.cookie, proxy: query.proxy });
 };

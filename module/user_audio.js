@@ -1,11 +1,8 @@
 // 用户创建的电台
-
+// /user/audio?uid=32953014
 module.exports = (query, request) => {
-    const data = {
-        userId: query.uid
-    }
-    return request(
-        'POST', `https://music.163.com/weapi/djradio/get/byuser`, data,
-        {crypto: 'weapi', cookie: query.cookie, proxy: query.proxy}
-    )
-}
+  const data = {
+    userId: query.uid,
+  };
+  return request('POST', `https://music.163.com/weapi/djradio/get/byuser`, data, { crypto: 'weapi', cookie: query.cookie, proxy: query.proxy });
+};
