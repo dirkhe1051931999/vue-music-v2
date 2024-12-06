@@ -10,5 +10,10 @@ module.exports = (query, request) => {
     limit: query.limit,
     offset: query.offset,
   };
-  return request('POST', `https://music.163.com/weapi/djradio/hot/v1`, data, { crypto: 'weapi', cookie: query.cookie, proxy: query.proxy });
+  return request('POST', '', data, {
+    crypto: 'weapi',
+    url: '/weapi/djradio/hot/v1',
+    cookie: query.cookie,
+    proxy: query.proxy,
+  });
 };

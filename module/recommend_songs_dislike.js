@@ -6,5 +6,10 @@ module.exports = (query, request) => {
     resType: 4,
     sceneType: 1,
   };
-  return request('POST', `https://music.163.com/api/v2/discovery/recommend/dislike`, data, { crypto: 'weapi', cookie: query.cookie, proxy: query.proxy });
+  return request('POST', '', data, {
+    crypto: 'weapi',
+    url: '/weapi/v2/discovery/recommend/dislike',
+    cookie: query.cookie,
+    proxy: query.proxy,
+  });
 };

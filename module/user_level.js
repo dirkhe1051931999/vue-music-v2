@@ -2,5 +2,10 @@
 // /user/level
 module.exports = (query, request) => {
   const data = {};
-  return request('POST', `https://music.163.com/api/user/level`, data, { crypto: 'weapi', cookie: query.cookie, proxy: query.proxy });
+  return request('POST', '', data, {
+    crypto: 'weapi',
+    url: '/weapi/user/level',
+    cookie: query.cookie,
+    proxy: query.proxy,
+  });
 };

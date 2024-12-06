@@ -11,5 +11,10 @@ module.exports = (query, request) => {
   if (query.type === 'A_EV_2_') {
     data.threadId = query.threadId;
   }
-  return request('POST', `https://music.163.com/weapi/resource/${query.t}`, data, { crypto: 'weapi', cookie: query.cookie, proxy: query.proxy });
+  return request('POST', '', data, {
+    crypto: 'weapi',
+    url: '/weapi/resource/${query.t}',
+    cookie: query.cookie,
+    proxy: query.proxy,
+  });
 };

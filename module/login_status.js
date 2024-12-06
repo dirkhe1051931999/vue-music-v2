@@ -2,8 +2,9 @@
 // /login/status
 module.exports = async (query, request) => {
   const data = {};
-  let result = await request('POST', `https://music.163.com/api/w/nuser/account/get`, data, {
+  let result = await request('POST', '', data, {
     crypto: 'weapi',
+    url: '/weapi/w/nuser/account/get',
     cookie: query.cookie,
     proxy: query.proxy,
   });

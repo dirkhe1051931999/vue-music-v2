@@ -1,6 +1,8 @@
 .DS_Store
 node_modules
 *.log
+anonymous_token
+deviceid
 dist/*
 
 .idea/

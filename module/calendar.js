@@ -5,9 +5,10 @@ module.exports = (query, request) => {
     startTime: query.startTime || Date.now(),
     endTime: query.endTime || Date.now(),
   };
-  return request('POST', `https://music.163.com/api/mcalendar/detail`, data, {
+  return request('POST', ``, data, {
     crypto: 'weapi',
     cookie: query.cookie,
     proxy: query.proxy,
+    url: '/weapi/mcalendar/detail',
   });
 };

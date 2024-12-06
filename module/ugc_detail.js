@@ -13,5 +13,10 @@ module.exports = (query, request) => {
     //曲库纠错 ARTIST:1 ALBUM:2 SONG:3 MV:4 LYRIC:5 TLYRIC:6
     //曲库补充 ALBUM:101 MV:103
   };
-  return request('POST', `https://music.163.com/api/rep/ugc/detail`, data, { crypto: 'weapi', cookie: query.cookie, proxy: query.proxy });
+  return request('POST', '', data, {
+    crypto: 'weapi',
+    url: '/weapi/rep/ugc/detail',
+    cookie: query.cookie,
+    proxy: query.proxy,
+  });
 };

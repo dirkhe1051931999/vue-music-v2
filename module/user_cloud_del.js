@@ -4,8 +4,9 @@ module.exports = (query, request) => {
   const data = {
     songIds: [query.id],
   };
-  return request('POST', `https://music.163.com/weapi/cloud/del`, data, {
+  return request('POST', '', data, {
     crypto: 'weapi',
+    url: '/weapi/cloud/del',
     cookie: query.cookie,
     proxy: query.proxy,
   });

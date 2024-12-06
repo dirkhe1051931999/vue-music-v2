@@ -10,5 +10,10 @@ module.exports = (query, request) => {
     offset: query.offset || 0,
     type: typeMap[query.type || 'new'] || '0', //0为新晋,1为热门
   };
-  return request('POST', `https://music.163.com/api/djradio/toplist`, data, { crypto: 'weapi', cookie: query.cookie, proxy: query.proxy });
+  return request('POST', '', data, {
+    crypto: 'weapi',
+    url: '/weapi/djradio/toplist',
+    cookie: query.cookie,
+    proxy: query.proxy,
+  });
 };

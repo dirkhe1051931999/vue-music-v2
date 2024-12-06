@@ -7,5 +7,10 @@ module.exports = (query, request) => {
     oldcaptcha: query.oldcaptcha,
     ctcode: query.ctcode || '86',
   };
-  return request('POST', `https://music.163.com/api/user/replaceCellphone`, data, { crypto: 'weapi', cookie: query.cookie, proxy: query.proxy });
+  return request('POST', '', data, {
+    crypto: 'weapi',
+    url: '/weapi/user/replaceCellphone',
+    cookie: query.cookie,
+    proxy: query.proxy,
+  });
 };

@@ -11,9 +11,10 @@ module.exports = (query, request) => {
       year: query.year,
     };
   }
-  return request('POST', `https://music.163.com/weapi/feealbum/songsaleboard/${type}/type`, data, {
+  return request('POST', '', data, {
     crypto: 'weapi',
     cookie: query.cookie,
     proxy: query.proxy,
+    url: `/weapi/feealbum/songsaleboard/${type}/type`,
   });
 };

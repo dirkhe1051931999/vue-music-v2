@@ -5,5 +5,10 @@ module.exports = (query, request) => {
     userMissionId: query.id,
     period: query.period,
   };
-  return request('POST', `https://music.163.com/api/nmusician/workbench/mission/reward/obtain/new`, data, { crypto: 'weapi', cookie: query.cookie, proxy: query.proxy });
+  return request('POST', '', data, {
+    crypto: 'weapi',
+    url: '/weapi/nmusician/workbench/mission/reward/obtain/new',
+    cookie: query.cookie,
+    proxy: query.proxy,
+  });
 };

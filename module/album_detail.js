@@ -8,6 +8,6 @@ module.exports = (query, request) => {
     crypto: 'weapi',
     cookie: query.cookie,
     proxy: query.proxy,
-    url: '/api/vipmall/albumproduct/detail',
+    url: '/weapi/vipmall/albumproduct/detail',
   });
 };

@@ -13,9 +13,10 @@ module.exports = (query, request) => {
     ]),
     from: 'web',
   };
-  return request('POST', `https://music.163.com/api/ordering/web/digital`, data, {
+  return request('POST', ``, data, {
     crypto: 'weapi',
     cookie: query.cookie,
     proxy: query.proxy,
+    url: '/weapi/ordering/web/digital',
   });
 };

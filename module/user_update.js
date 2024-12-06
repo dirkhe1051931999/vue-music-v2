@@ -10,5 +10,10 @@ module.exports = (query, request) => {
     province: query.province,
     signature: query.signature,
   };
-  return request('POST', `https://music.163.com/weapi/user/profile/update`, data, { crypto: 'weapi', cookie: query.cookie, proxy: query.proxy });
+  return request('POST', '', data, {
+    crypto: 'weapi',
+    url: '/weapi/user/profile/update',
+    cookie: query.cookie,
+    proxy: query.proxy,
+  });
 };

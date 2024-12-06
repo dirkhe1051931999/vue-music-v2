@@ -7,5 +7,10 @@ module.exports = (query, request) => {
     offset: query.offset || 0,
     includeVideo: true,
   };
-  return request('POST', `https://music.163.com/weapi/user/playlist`, data, { crypto: 'weapi', cookie: query.cookie, proxy: query.proxy });
+  return request('POST', '', data, {
+    crypto: 'weapi',
+    url: '/weapi/user/playlist',
+    cookie: query.cookie,
+    proxy: query.proxy,
+  });
 };

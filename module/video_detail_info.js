@@ -5,5 +5,10 @@ module.exports = (query, request) => {
     threadid: `R_VI_62_${query.vid}`,
     composeliked: true,
   };
-  return request('POST', `https://music.163.com/api/comment/commentthread/info`, data, { crypto: 'weapi', cookie: query.cookie, proxy: query.proxy });
+  return request('POST', '', data, {
+    crypto: 'weapi',
+    url: '/weapi/comment/commentthread/info',
+    cookie: query.cookie,
+    proxy: query.proxy,
+  });
 };

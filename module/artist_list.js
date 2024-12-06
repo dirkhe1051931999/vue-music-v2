@@ -26,9 +26,10 @@ module.exports = (query, request) => {
     type: query.type || '1',
     area: query.area,
   };
-  return request('POST', `https://music.163.com/weapi/v1/artist/list`, data, {
+  return request('POST', ``, data, {
     crypto: 'weapi',
     cookie: query.cookie,
     proxy: query.proxy,
+    url: '/weapi/v1/artist/list',
   });
 };

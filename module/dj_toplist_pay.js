@@ -5,5 +5,10 @@ module.exports = (query, request) => {
     limit: query.limit || 100,
     // 不支持 offset
   };
-  return request('POST', `https://music.163.com/api/djradio/toplist/pay`, data, { crypto: 'weapi', cookie: query.cookie, proxy: query.proxy });
+  return request('POST', '', data, {
+    crypto: 'weapi',
+    url: '/weapi/djradio/toplist/pay',
+    cookie: query.cookie,
+    proxy: query.proxy,
+  });
 };

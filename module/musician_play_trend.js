@@ -5,5 +5,10 @@ module.exports = (query, request) => {
     startTime: query.startTime,
     endTime: query.endTime,
   };
-  return request('POST', `https://music.163.com/api/creator/musician/play/count/statistic/data/trend/get`, data, { crypto: 'weapi', cookie: query.cookie, proxy: query.proxy });
+  return request('POST', '', data, {
+    crypto: 'weapi',
+    url: '/weapi/creator/musician/play/count/statistic/data/trend/get',
+    cookie: query.cookie,
+    proxy: query.proxy,
+  });
 };

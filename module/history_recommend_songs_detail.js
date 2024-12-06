@@ -4,5 +4,10 @@ module.exports = (query, request) => {
   const data = {
     date: query.date || '',
   };
-  return request('POST', `https://music.163.com/api/discovery/recommend/songs/history/detail`, data, { crypto: 'weapi', cookie: query.cookie, proxy: query.proxy });
+  return request('POST', '', data, {
+    crypto: 'weapi',
+    url: '/weapi/discovery/recommend/songs/history/detail',
+    cookie: query.cookie,
+    proxy: query.proxy,
+  });
 };

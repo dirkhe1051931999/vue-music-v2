@@ -8,8 +8,9 @@ module.exports = (query, request) => {
     uid: query.uid,
   };
   // 448109360
-  return request('POST', `https://music.163.com/api/v1/user/comments/${query.uid}`, data, {
+  return request('POST', '', data, {
     crypto: 'weapi',
+    url: `/weapi/v1/user/comments/${query.uid}`,
     cookie: query.cookie,
     proxy: query.proxy,
   });

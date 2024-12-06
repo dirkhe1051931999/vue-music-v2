@@ -7,5 +7,10 @@ module.exports = (query, request) => {
     lasttime: query.before || 0, // 歌单updateTime
     total: true,
   };
-  return request('POST', `https://music.163.com/weapi/playlist/highquality/list`, data, { crypto: 'weapi', cookie: query.cookie, proxy: query.proxy });
+  return request('POST', '', data, {
+    crypto: 'weapi',
+    url: '/weapi/playlist/highquality/list',
+    cookie: query.cookie,
+    proxy: query.proxy,
+  });
 };

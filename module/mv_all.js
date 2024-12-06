@@ -11,8 +11,9 @@ module.exports = (query, request) => {
     total: 'true',
     limit: query.limit || 30,
   };
-  return request('POST', `https://interface.music.163.com/api/mv/all`, data, {
+  return request('POST', '', data, {
     crypto: 'weapi',
+    url: '/weapi/mv/all',
     cookie: query.cookie,
     proxy: query.proxy,
   });

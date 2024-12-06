@@ -7,8 +7,9 @@ module.exports = (query, request) => {
     offset: query.offset || 0,
     total: true,
   };
-  return request('POST', `https://music.163.com/weapi/mv/toplist`, data, {
+  return request('POST', '', data, {
     crypto: 'weapi',
+    url: '/weapi/mv/toplist',
     cookie: query.cookie,
     proxy: query.proxy,
   });

@@ -1,4 +1,5 @@
 // /verify/getQr
+
 const QRCode = require('qrcode');
 module.exports = async (query, request) => {
   const data = {
@@ -12,7 +13,11 @@ module.exports = async (query, request) => {
     size: 150,
   };
 
-  const res = await request(`https://music.163.com/api/frontrisk/verify/getqrcode`, data, { crypto: 'weapi', cookie: query.cookie, proxy: query.proxy });
+  const res = await request(`https://music.163.com/api/frontrisk/verify/getqrcode`, data, {
+    crypto: 'weapi',
+    cookie: query.cookie,
+    proxy: query.proxy,
+  });
   const result = `https://st.music.163.com/encrypt-pages?qrCode=${res.body.data.qrCode}&verifyToken=${query.token}&verifyId=${query.vid}&verifyType=${query.type}&params=${JSON.stringify({
     event_id: query.evid,
     sign: query.sign,

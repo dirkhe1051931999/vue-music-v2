@@ -6,5 +6,10 @@ module.exports = (query, request) => {
     limit: query.limit || 10,
     areaId: query.areaId || 0,
   };
-  return request('POST', `https://music.163.com/weapi/personalized/newsong`, data, { crypto: 'weapi', cookie: query.cookie, proxy: query.proxy });
+  return request('POST', '', data, {
+    crypto: 'weapi',
+    url: '/weapi/personalized/newsong',
+    cookie: query.cookie,
+    proxy: query.proxy,
+  });
 };

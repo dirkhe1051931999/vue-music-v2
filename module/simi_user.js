@@ -6,5 +6,10 @@ module.exports = (query, request) => {
     limit: query.limit || 50,
     offset: query.offset || 0,
   };
-  return request('POST', `https://music.163.com/weapi/discovery/simiUser`, data, { crypto: 'weapi', cookie: query.cookie, proxy: query.proxy });
+  return request('POST', '', data, {
+    crypto: 'weapi',
+    url: '/weapi/discovery/simiUser',
+    cookie: query.cookie,
+    proxy: query.proxy,
+  });
 };

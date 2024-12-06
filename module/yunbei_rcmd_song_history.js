@@ -7,5 +7,10 @@ module.exports = (query, request) => {
       cursor: query.cursor || '',
     }),
   };
-  return request('POST', `https://music.163.com/api/yunbei/rcmd/song/history/list`, data, { crypto: 'weapi', cookie: query.cookie, proxy: query.proxy });
+  return request('POST', '', data, {
+    crypto: 'weapi',
+    url: '/weapi/yunbei/rcmd/song/history/list',
+    cookie: query.cookie,
+    proxy: query.proxy,
+  });
 };

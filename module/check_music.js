@@ -5,7 +5,12 @@ module.exports = (query, request) => {
     ids: '[' + parseInt(query.id) + ']',
     br: parseInt(query.br || 999000),
   };
-  return request('POST', `https://music.163.com/weapi/song/enhance/player/url`, data, { crypto: 'weapi', cookie: query.cookie, proxy: query.proxy }).then((response) => {
+  return request('POST', ``, data, {
+    crypto: 'weapi',
+    cookie: query.cookie,
+    proxy: query.proxy,
+    url: '/weapi/song/enhance/player/url',
+  }).then((response) => {
     let playable = false;
     if (response.body.code === 200) {
       if (response.body.data[0].code === 200) {

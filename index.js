@@ -81,7 +81,6 @@ function generateConfig() {
 
 // 应用设置
 const app = express();
-generateConfig();
 
 // 中间件配置
 app.use(corsMiddleware);
@@ -98,6 +97,7 @@ try {
     const route = CONFIG.specialRoutes[file] || '/' + file.replace(/\.js$/i, '').replace(/_/g, '/');
     app.use(route, handleRoute(route, handler));
   });
+  generateConfig();
 } catch (e) {
   console.error('路由配置出错', e);
 }

@@ -5,5 +5,10 @@ module.exports = (query, request) => {
     pagesize: query.pagesize || 20,
     lasttime: query.lasttime || -1,
   };
-  return request('POST', `https://music.163.com/weapi/v1/event/get`, data, { crypto: 'weapi', cookie: query.cookie, proxy: query.proxy });
+  return request('POST', '', data, {
+    crypto: 'weapi',
+    url: '/weapi/v1/event/get',
+    cookie: query.cookie,
+    proxy: query.proxy,
+  });
 };

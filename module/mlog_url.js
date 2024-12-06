@@ -6,5 +6,10 @@ module.exports = (query, request) => {
     resolution: query.res || 1080,
     type: 1,
   };
-  return request('POST', `https://music.163.com/api/mlog/detail/v1`, data, { crypto: 'weapi', cookie: query.cookie, proxy: query.proxy });
+  return request('POST', '', data, {
+    crypto: 'weapi',
+    url: '/weapi/mlog/detail/v1',
+    cookie: query.cookie,
+    proxy: query.proxy,
+  });
 };

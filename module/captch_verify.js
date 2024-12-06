@@ -6,5 +6,10 @@ module.exports = (query, request) => {
     cellphone: query.phone,
     captcha: query.captcha,
   };
-  return request('POST', `https://music.163.com/weapi/sms/captcha/verify`, data, { crypto: 'weapi', cookie: query.cookie, proxy: query.proxy });
+  return request('POST', ``, data, {
+    crypto: 'weapi',
+    cookie: query.cookie,
+    proxy: query.proxy,
+    url: '/weapi/sms/captcha/verify',
+  });
 };

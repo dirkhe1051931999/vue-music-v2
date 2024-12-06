@@ -5,5 +5,10 @@ module.exports = (query, request) => {
     uid: query.uid,
     type: query.type || 1, // 1: 最近一周, 0: 所有时间
   };
-  return request('POST', `https://music.163.com/weapi/v1/play/record`, data, { crypto: 'weapi', cookie: query.cookie, proxy: query.proxy });
+  return request('POST', '', data, {
+    crypto: 'weapi',
+    url: '/weapi/v1/play/record',
+    cookie: query.cookie,
+    proxy: query.proxy,
+  });
 };

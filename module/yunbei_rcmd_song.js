@@ -8,5 +8,10 @@ module.exports = (query, request) => {
     fromUserId: -1,
     yunbeiNum: query.yunbeiNum || 10,
   };
-  return request('POST', `https://music.163.com/api/yunbei/rcmd/song/submit`, data, { crypto: 'weapi', cookie: query.cookie, proxy: query.proxy });
+  return request('POST', '', data, {
+    crypto: 'weapi',
+    url: '/weapi/yunbei/rcmd/song/submit',
+    cookie: query.cookie,
+    proxy: query.proxy,
+  });
 };

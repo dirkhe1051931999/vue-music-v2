@@ -7,8 +7,9 @@ module.exports = (query, request) => {
     privacy: query.privacy || '0', // 0 普通歌单, 10 隐私歌单
     type: query.type || 'NORMAL', // 默认 NORMAL, VIDEO 视频歌单, SHARED 共享歌单
   };
-  return request('POST', `https://music.163.com/weapi/playlist/create`, data, {
+  return request('POST', '', data, {
     crypto: 'weapi',
+    url: '/weapi/playlist/create',
     cookie: query.cookie,
     proxy: query.proxy,
   });

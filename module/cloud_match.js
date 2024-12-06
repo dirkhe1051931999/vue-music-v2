@@ -6,9 +6,10 @@ module.exports = (query, request) => {
     songId: query.sid,
     adjustSongId: query.asid,
   };
-  return request('POST', `https://music.163.com/weapi/cloud/user/song/match`, data, {
+  return request('POST', ``, data, {
     crypto: 'weapi',
     cookie: query.cookie,
     proxy: query.proxy,
+    url: '/weapi/cloud/user/song/match',
   });
 };

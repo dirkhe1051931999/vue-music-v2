@@ -8,5 +8,15 @@ module.exports = (query, request) => {
       2: 'iphone',
       3: 'ipad',
     }[query.type || 0] || 'pc';
-  return request('POST', `https://music.163.com/api/v2/banner/get`, { clientType: type }, { crypto: 'linuxapi', proxy: query.proxy, cookie: query.cookie });
+  return request(
+    'POST',
+    '',
+    { clientType: type },
+    {
+      crypto: 'weapi',
+      proxy: query.proxy,
+      cookie: query.cookie,
+      url: '/weapi/v2/banner/get',
+    }
+  );
 };

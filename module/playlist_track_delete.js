@@ -11,5 +11,10 @@ module.exports = async (query, request) => {
     ),
   };
 
-  return request('POST', `https://music.163.com/api/playlist/track/delete`, data, { crypto: 'weapi', cookie: query.cookie, proxy: query.proxy });
+  return request('POST', '', data, {
+    crypto: 'weapi',
+    url: '/weapi/playlist/track/delete',
+    cookie: query.cookie,
+    proxy: query.proxy,
+  });
 };

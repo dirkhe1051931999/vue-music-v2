@@ -2,8 +2,9 @@
 // /video/group/list
 module.exports = (query, request) => {
   const data = {};
-  return request('POST', `https://music.163.com/api/cloudvideo/group/list`, data, {
+  return request('POST', '', data, {
     crypto: 'weapi',
+    url: '/weapi/cloudvideo/group/list',
     cookie: query.cookie,
     proxy: query.proxy,
   });

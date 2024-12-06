@@ -1,5 +1,15 @@
 // 推荐电台
 // /personalized/djprogram
 module.exports = (query, request) => {
-  return request('POST', `https://music.163.com/weapi/personalized/djprogram`, {}, { crypto: 'weapi', cookie: query.cookie, proxy: query.proxy });
+  return request(
+    'POST',
+    '',
+    {},
+    {
+      crypto: 'weapi',
+      url: '/weapi/personalized/djprogram',
+      cookie: query.cookie,
+      proxy: query.proxy,
+    }
+  );
 };

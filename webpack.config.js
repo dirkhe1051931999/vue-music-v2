@@ -50,6 +50,10 @@ module.exports = {
           from: path.resolve(__dirname, 'module'),
           to: path.resolve(__dirname, 'dist/module'),
         },
+        {
+          from: path.resolve(__dirname, 'data'),
+          to: path.resolve(__dirname, 'dist/data'),
+        },
       ],
     }),
   ],

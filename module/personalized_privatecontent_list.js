@@ -6,5 +6,10 @@ module.exports = (query, request) => {
     total: 'true',
     limit: query.limit || 60,
   };
-  return request('POST', `https://music.163.com/api/v2/privatecontent/list`, data, { crypto: 'weapi', cookie: query.cookie, proxy: query.proxy });
+  return request('POST', '', data, {
+    crypto: 'weapi',
+    url: '/weapi/v2/privatecontent/list',
+    cookie: query.cookie,
+    proxy: query.proxy,
+  });
 };

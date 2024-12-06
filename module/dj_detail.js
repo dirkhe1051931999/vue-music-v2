@@ -4,5 +4,10 @@ module.exports = (query, request) => {
   const data = {
     id: query.rid,
   };
-  return request('POST', `https://music.163.com/weapi/djradio/get`, data, { crypto: 'weapi', cookie: query.cookie, proxy: query.proxy });
+  return request('POST', ``, data, {
+    crypto: 'weapi',
+    cookie: query.cookie,
+    proxy: query.proxy,
+    url: '/weapi/djradio/get',
+  });
 };

@@ -4,5 +4,10 @@ module.exports = (query, request) => {
   const data = {
     mlogId: query.id,
   };
-  return request('POST', `https://music.163.com/api/mlog/video/convert/id`, data, { crypto: 'weapi', cookie: query.cookie, proxy: query.proxy });
+  return request('POST', '', data, {
+    crypto: 'weapi',
+    url: '/weapi/mlog/video/convert/id',
+    cookie: query.cookie,
+    proxy: query.proxy,
+  });
 };

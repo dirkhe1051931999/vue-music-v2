@@ -2,5 +2,10 @@
 // /user/binding
 module.exports = (query, request) => {
   const data = {};
-  return request('POST', `https://music.163.com/api/v1/user/bindings/${query.uid}`, data, { crypto: 'weapi', cookie: query.cookie, proxy: query.proxy });
+  return request('POST', '', data, {
+    crypto: 'weapi',
+    url: `/weapi/v1/user/bindings/${query.uid}`,
+    cookie: query.cookie,
+    proxy: query.proxy,
+  });
 };

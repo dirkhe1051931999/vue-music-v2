@@ -9,9 +9,10 @@ module.exports = (query, request) => {
     time: query.time || -1,
     limit: query.limit || 20,
   };
-  return request('POST', `https://music.163.com/weapi/resource/comment/floor/get`, data, {
+  return request('POST', ``, data, {
     crypto: 'weapi',
     cookie: query.cookie,
     proxy: query.proxy,
+    url: `/weapi/resource/comment/floor/get`,
   });
 };

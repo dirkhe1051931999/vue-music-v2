@@ -7,5 +7,10 @@ module.exports = (query, request) => {
     total: true,
     n: 1000,
   };
-  return request('POST', `https://music.163.com/weapi/personalized/playlist`, data, { crypto: 'weapi', cookie: query.cookie, proxy: query.proxy });
+  return request('POST', '', data, {
+    crypto: 'weapi',
+    url: '/weapi/personalized/playlist',
+    cookie: query.cookie,
+    proxy: query.proxy,
+  });
 };

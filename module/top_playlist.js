@@ -8,5 +8,10 @@ module.exports = (query, request) => {
     offset: query.offset || 0,
     total: true,
   };
-  return request('POST', `https://music.163.com/weapi/playlist/list`, data, { crypto: 'weapi', cookie: query.cookie, proxy: query.proxy });
+  return request('POST', '', data, {
+    crypto: 'weapi',
+    url: '/weapi/playlist/list',
+    cookie: query.cookie,
+    proxy: query.proxy,
+  });
 };

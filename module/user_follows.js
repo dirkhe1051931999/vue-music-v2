@@ -6,5 +6,10 @@ module.exports = (query, request) => {
     limit: query.limit || 30,
     order: true,
   };
-  return request('POST', `https://music.163.com/weapi/user/getfollows/${query.uid}`, data, { crypto: 'weapi', cookie: query.cookie, proxy: query.proxy });
+  return request('POST', '', data, {
+    crypto: 'weapi',
+    url: `/weapi/user/getfollows/${query.uid}`,
+    cookie: query.cookie,
+    proxy: query.proxy,
+  });
 };

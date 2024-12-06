@@ -1,9 +1,14 @@
 // 发送验证码
-// /captch/sent?phone=15829050465
+// /captch/sent?phone=1
 module.exports = (query, request) => {
   const data = {
     ctcode: query.ctcode || '86',
     cellphone: query.phone,
   };
-  return request('POST', `https://music.163.com/weapi/sms/captcha/sent`, data, { crypto: 'weapi', cookie: query.cookie, proxy: query.proxy });
+  return request('POST', ``, data, {
+    crypto: 'weapi',
+    cookie: query.cookie,
+    proxy: query.proxy,
+    url: '/weapi/sms/captcha/sent',
+  });
 };

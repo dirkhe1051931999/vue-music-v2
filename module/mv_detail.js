@@ -4,5 +4,10 @@ module.exports = (query, request) => {
   const data = {
     id: query.mvid,
   };
-  return request('POST', `https://music.163.com/weapi/mv/detail`, data, { crypto: 'weapi', cookie: query.cookie, proxy: query.proxy });
+  return request('POST', '', data, {
+    crypto: 'weapi',
+    url: '/weapi/mv/detail',
+    cookie: query.cookie,
+    proxy: query.proxy,
+  });
 };

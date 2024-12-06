@@ -5,5 +5,10 @@ module.exports = (query, request) => {
     limit: query.limit || 30,
     offset: query.offset || 0,
   };
-  return request('POST', `https://music.163.com/weapi/dj/program/${query.uid}`, data, { crypto: 'weapi', cookie: query.cookie, proxy: query.proxy });
+  return request('POST', '', data, {
+    crypto: 'weapi',
+    url: `/weapi/dj/program/${query.uid}`,
+    cookie: query.cookie,
+    proxy: query.proxy,
+  });
 };

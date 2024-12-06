@@ -4,5 +4,10 @@ module.exports = (query, request) => {
   const data = {
     actid: query.actid,
   };
-  return request('POST', `https://music.163.com/api/act/event/hot`, data, { crypto: 'weapi', cookie: query.cookie, proxy: query.proxy });
+  return request('POST', '', data, {
+    crypto: 'weapi',
+    url: '/weapi/act/event/hot',
+    cookie: query.cookie,
+    proxy: query.proxy,
+  });
 };

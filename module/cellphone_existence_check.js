@@ -5,9 +5,11 @@ module.exports = (query, request) => {
     cellphone: query.phone,
     countrycode: query.countrycode,
   };
-  return request('POST', `https://music.163.com/api/cellphone/existence/check`, data, {
+  return request('POST', '', data, {
     crypto: 'weapi',
+    url: '/weapi/cellphone/existence/check',
     cookie: query.cookie,
     proxy: query.proxy,
+    url: '/weapi/cellphone/existence/check',
   });
 };

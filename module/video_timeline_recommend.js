@@ -8,5 +8,10 @@ module.exports = (query, request) => {
     needUrl: '1',
     resolution: '480',
   };
-  return request('POST', `https://music.163.com/api/videotimeline/get`, data, { crypto: 'weapi', cookie: query.cookie, proxy: query.proxy });
+  return request('POST', '', data, {
+    crypto: 'weapi',
+    url: '/weapi/videotimeline/get',
+    cookie: query.cookie,
+    proxy: query.proxy,
+  });
 };

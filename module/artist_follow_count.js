@@ -4,9 +4,10 @@ module.exports = (query, request) => {
   const data = {
     id: query.id,
   };
-  return request('POST', `https://music.163.com/weapi/artist/follow/count/get`, data, {
+  return request('POST', ``, data, {
     crypto: 'weapi',
     cookie: query.cookie,
     proxy: query.proxy,
+    url: '/weapi/artist/follow/count/get',
   });
 };

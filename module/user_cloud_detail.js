@@ -5,5 +5,10 @@ module.exports = (query, request) => {
   const data = {
     songIds: id,
   };
-  return request('POST', `https://music.163.com/weapi/v1/cloud/get/byids`, data, { crypto: 'weapi', cookie: query.cookie, proxy: query.proxy });
+  return request('POST', '', data, {
+    crypto: 'weapi',
+    url: '/weapi/v1/cloud/get/byids',
+    cookie: query.cookie,
+    proxy: query.proxy,
+  });
 };

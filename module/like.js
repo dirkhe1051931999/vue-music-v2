@@ -8,8 +8,9 @@ module.exports = (query, request) => {
     like: query.like,
     time: '3',
   };
-  return request('POST', `https://music.163.com/api/radio/like`, data, {
+  return request('POST', '', data, {
     crypto: 'weapi',
+    url: '/weapi/radio/like',
     cookie: query.cookie,
     proxy: query.proxy,
   });

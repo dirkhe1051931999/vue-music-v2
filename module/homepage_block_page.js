@@ -4,5 +4,10 @@
 // /homepage/block/page
 module.exports = (query, request) => {
   const data = { refresh: query.refresh || false, cursor: query.cursor };
-  return request('POST', `https://music.163.com/api/homepage/block/page`, data, { crypto: 'weapi', cookie: query.cookie, proxy: query.proxy });
+  return request('POST', '', data, {
+    crypto: 'weapi',
+    url: '/weapi/homepage/block/page',
+    cookie: query.cookie,
+    proxy: query.proxy,
+  });
 };

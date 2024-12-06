@@ -1,3 +1,6 @@
+// 获取临时登录凭证
+// /register/anonimous
+
 const CryptoJS = require('crypto-js');
 const path = require('path');
 const fs = require('fs');
@@ -22,7 +25,12 @@ module.exports = async (query, request) => {
   const data = {
     username: encodedId,
   };
-  let result = await request('POST', `https://music.163.com/api/register/anonimous`, data, { crypto: 'weapi', cookie: query.cookie, proxy: query.proxy });
+  let result = await request('POST', '', data, {
+    crypto: 'weapi',
+    url: '/weapi/register/anonimous',
+    cookie: query.cookie,
+    proxy: query.proxy,
+  });
   if (result.body.code === 200) {
     result = {
       status: 200,

@@ -10,9 +10,10 @@ module.exports = (query, request) => {
     tab: 0,
     order: query.order || 0,
   };
-  return request('POST', `https://music.163.com/weapi/mlog/artist/video`, data, {
+  return request('POST', ``, data, {
     crypto: 'weapi',
     cookie: query.cookie,
     proxy: query.proxy,
+    url: '/weapi/mlog/artist/video',
   });
 };

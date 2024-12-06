@@ -8,5 +8,10 @@ module.exports = (query, request) => {
     data.type = 1;
     data.limit = query.limit || 60;
   }
-  return request('POST', `https://music.163.com/api/vipmusic/newrecord/weekflow`, data, { crypto: 'weapi', cookie: query.cookie, proxy: query.proxy });
+  return request('POST', '', data, {
+    crypto: 'weapi',
+    url: '/weapi/vipmusic/newrecord/weekflow',
+    cookie: query.cookie,
+    proxy: query.proxy,
+  });
 };

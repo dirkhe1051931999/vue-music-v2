@@ -9,5 +9,10 @@ module.exports = (query, request) => {
     captcha: query.captcha,
     password: query.password ? CryptoJS.MD5(query.password).toString() : '',
   };
-  return request('POST', `https://music.163.com/api/user/bindingCellphone`, data, { crypto: 'weapi', cookie: query.cookie, proxy: query.proxy });
+  return request('POST', '', data, {
+    crypto: 'weapi',
+    url: '/weapi/user/bindingCellphone',
+    cookie: query.cookie,
+    proxy: query.proxy,
+  });
 };

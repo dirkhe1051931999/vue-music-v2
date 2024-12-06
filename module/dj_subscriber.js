@@ -7,8 +7,9 @@ module.exports = (query, request) => {
     limit: query.limit || '20',
     total: 'true',
   };
-  return request('POST', `https://music.163.com/api/djradio/subscriber`, data, {
+  return request('POST', '', data, {
     crypto: 'weapi',
+    url: '/weapi/djradio/subscriber',
     cookie: query.cookie,
     proxy: query.proxy,
   });

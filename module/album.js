@@ -9,7 +9,7 @@ module.exports = (query, request) => {
       crypto: 'weapi',
       cookie: query.cookie,
       proxy: query.proxy,
-      url: `/api/v1/album/${query.id}`,
+      url: `/weapi/v1/album/${query.id}`,
     }
   );
 };

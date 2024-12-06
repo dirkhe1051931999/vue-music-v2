@@ -16,13 +16,18 @@ fs.readdir(directoryPath, (err, files) => {
 
   // 生成模块映射对象
   const modules = jsFiles.reduce((acc, file) => {
-    acc[file] = `require('.\\${path.join(directoryPath, file)}')`;
+    acc[file] = `require('./${path.join(directoryPath, file)}')`;
     return acc;
   }, {});
 
   // 生成最终的代码字符串，加个注释：这个自动生成的，不要手动改
-  const moduleString = `/*这个自动生成的，不要手动改*/\nmodule.exports = ${JSON.stringify(modules, null, 2).replace(/"require\('.*?'\)"/g, function (match) {
-    return match.slice(1, -1);
+  const moduleString = `/*这个自动生成的，不要手动改*/
+module.exports = ${JSON.stringify(modules, null, 2).replace(/"require\('.*?'\)"/g, function (match) {
+    // 移除开头的 "require(' 和结尾的 ')"
+    const requirePath = match.slice(10, -3);
+    // 使用正则替换所有反斜杠为正斜杠
+    const normalizedPath = requirePath.replace(/\\/g, '/');
+    return `require('${normalizedPath}')`;
   })}`;
 
   // 将生成的代码写入新文件

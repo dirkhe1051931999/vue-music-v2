@@ -7,9 +7,10 @@ module.exports = (query, request) => {
     total: true,
     area: query.area || 'Z_H', //Z_H:华语,E_A:欧美,KR:韩国,JP:日本
   };
-  return request('POST', `https://music.163.com/weapi/vipmall/appalbum/album/style`, data, {
+  return request('POST', ``, data, {
     crypto: 'weapi',
     cookie: query.cookie,
     proxy: query.proxy,
+    url: '/weapi/vipmall/appalbum/album/style',
   });
 };

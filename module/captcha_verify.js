@@ -6,9 +6,10 @@ module.exports = (query, request) => {
     cellphone: query.phone,
     captcha: query.captcha,
   };
-  return request('POST', `https://music.163.com/api/sms/captcha/verify`, data, {
+  return request('POST', ``, data, {
     crypto: 'weapi',
     cookie: query.cookie,
     proxy: query.proxy,
+    url: '/weapi/sms/captcha/verify',
   });
 };

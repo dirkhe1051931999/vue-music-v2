@@ -5,5 +5,10 @@ module.exports = (query, request) => {
     type: query.type || 1,
     s: query.keywords || '',
   };
-  return request('POST', `https://music.163.com/weapi/search/suggest/multimatch`, data, { crypto: 'weapi', cookie: query.cookie, proxy: query.proxy });
+  return request('POST', '', data, {
+    crypto: 'weapi',
+    url: '/weapi/search/suggest/multimatch',
+    cookie: query.cookie,
+    proxy: query.proxy,
+  });
 };

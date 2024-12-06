@@ -7,8 +7,9 @@ module.exports = (query, request) => {
     limit: query.limit || 30,
     total: 'true',
   };
-  return request('POST', `https://music.163.com/api/msg/private/history`, data, {
+  return request('POST', '', data, {
     crypto: 'weapi',
+    url: '/weapi/msg/private/history',
     cookie: query.cookie,
     proxy: query.proxy,
   });

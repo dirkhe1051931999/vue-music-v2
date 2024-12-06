@@ -6,8 +6,9 @@ module.exports = (query, request) => {
     limit: query.limit || 30,
     total: 'true',
   };
-  return request('POST', `https://music.163.com/api/forwards/get`, data, {
+  return request('POST', '', data, {
     crypto: 'weapi',
+    url: '/weapi/forwards/get',
     cookie: query.cookie,
     proxy: query.proxy,
   });

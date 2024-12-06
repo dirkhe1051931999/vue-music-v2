@@ -5,9 +5,10 @@ module.exports = (query, request) => {
     limit: query.limit || 20,
     startTimestamp: query.before || Date.now(),
   };
-  return request('POST', `https://music.163.com/api/sub/artist/new/works/mv/list`, data, {
+  return request('POST', ``, data, {
     crypto: 'weapi',
     cookie: query.cookie,
     proxy: query.proxy,
+    url: '/weapi/sub/artist/new/works/mv/list',
   });
 };
