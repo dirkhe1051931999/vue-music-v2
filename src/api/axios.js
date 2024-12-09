@@ -3,7 +3,7 @@ import axios from 'axios';
 // 基础配置
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 axios.defaults.timeout = 20000;
-axios.defaults.baseURL = process.env.NODE_ENV === 'development' ? 'http://localhost:3001' : 'http://38.55.251.226:3001';
+axios.defaults.baseURL = process.env.NODE_ENV === 'development' ? 'http://localhost:3001' : 'https://163-api.oolaf.top';
 
 // 状态码信息
 const codeMessage = {
