@@ -103,7 +103,7 @@ try {
 }
 
 // 启动服务器
-app.server = app.listen(CONFIG.port, () => {
+app.server = app.listen(CONFIG.port, '0.0.0.0', () => {
   console.log(`server running @ http://localhost:${CONFIG.port}`);
 });
 
